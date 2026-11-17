@@ -1,5 +1,5 @@
 import "server-only";
-import { createClient } from "@/lib/supabase/server";
+import { createPublicClient } from "@/lib/supabase/public";
 import type { Product, Category, Settings } from "@/lib/types";
 
 // All queries are read-only and respect RLS (public read on active rows).
@@ -8,7 +8,7 @@ import type { Product, Category, Settings } from "@/lib/types";
 
 export async function getSettings(): Promise<Settings | null> {
   try {
-    const supabase = createClient();
+    const supabase = createPublicClient();
     const { data } = await supabase.from("settings").select("*").eq("id", 1).single();
     return (data as Settings) ?? null;
   } catch {
@@ -18,7 +18,7 @@ export async function getSettings(): Promise<Settings | null> {
 
 export async function getCategories(): Promise<Category[]> {
   try {
-    const supabase = createClient();
+    const supabase = createPublicClient();
     const { data } = await supabase
       .from("categories")
       .select("*")
@@ -32,7 +32,7 @@ export async function getCategories(): Promise<Category[]> {
 
 export async function getFeaturedProducts(limit = 8): Promise<Product[]> {
   try {
-    const supabase = createClient();
+    const supabase = createPublicClient();
     const { data } = await supabase
       .from("products")
       .select("*, category:categories(*)")
@@ -57,7 +57,7 @@ export interface ShopQuery {
 export async function getProducts(q: ShopQuery = {}): Promise<{ products: Product[]; total: number }> {
   const { search, category, sort = "newest", page = 1, perPage = 9 } = q;
   try {
-    const supabase = createClient();
+    const supabase = createPublicClient();
     let query = supabase
       .from("products")
       .select("*, category:categories!inner(*)", { count: "exact" })
@@ -82,7 +82,7 @@ export async function getProducts(q: ShopQuery = {}): Promise<{ products: Produc
 
 export async function getProductBySlug(slug: string): Promise<Product | null> {
   try {
-    const supabase = createClient();
+    const supabase = createPublicClient();
     const { data } = await supabase
       .from("products")
       .select("*, category:categories(*)")
@@ -102,7 +102,7 @@ export async function getRelatedProducts(
 ): Promise<Product[]> {
   if (!categoryId) return [];
   try {
-    const supabase = createClient();
+    const supabase = createPublicClient();
     const { data } = await supabase
       .from("products")
       .select("*, category:categories(*)")
@@ -120,7 +120,7 @@ export async function getRelatedProducts(
 export async function getProductsByIds(ids: string[]): Promise<Product[]> {
   if (!ids || ids.length === 0) return [];
   try {
-    const supabase = createClient();
+    const supabase = createPublicClient();
     const { data } = await supabase
       .from("products")
       .select("*, category:categories(*)")
@@ -136,7 +136,7 @@ export async function getProductsByIds(ids: string[]): Promise<Product[]> {
 
 export async function getAllProductSlugs(): Promise<string[]> {
   try {
-    const supabase = createClient();
+    const supabase = createPublicClient();
     const { data } = await supabase.from("products").select("slug").eq("is_active", true);
     return (data ?? []).map((r: { slug: string }) => r.slug);
   } catch {
