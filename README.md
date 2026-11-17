@@ -287,6 +287,10 @@ It is historical context, not current state — this README describes the finish
 
 ## 9. Deploying
 
+Free hosting guide: **[DEPLOY.md](DEPLOY.md)** — GitHub → Vercel (recommended) or Render
+(`render.yaml` blueprint included), plus the Supabase redirect-URL setup and a post-deploy
+smoke test.
+
 1. Push the repo to GitHub and import it into Vercel (framework auto-detected).
 2. Add the environment variables from §5 in **Project → Settings → Environment Variables**
    (use your production domain for `NEXT_PUBLIC_SITE_URL`).
