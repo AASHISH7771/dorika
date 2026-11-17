@@ -41,6 +41,7 @@ export async function POST(req: NextRequest) {
   const { data, error } = await admin.rpc(rpc, arg);
 
   if (error) {
+    console.error(`[track] rpc ${rpc} failed:`, error);
     return NextResponse.json({ error: "Lookup failed. Please try again." }, { status: 500 });
   }
   if (!data) {

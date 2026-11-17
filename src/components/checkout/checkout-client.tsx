@@ -88,6 +88,7 @@ export function CheckoutClient({ settings }: { settings: Settings | null }) {
     <form onSubmit={submit} className="grid gap-8 lg:grid-cols-[1fr_380px]">
       {/* Honeypot */}
       <input type="text" tabIndex={-1} autoComplete="off" className="hp-field"
+        data-lpignore="true" data-1p-ignore="true" data-form-type="other"
         aria-hidden="true" name={HONEYPOT_FIELD} value={hp} onChange={(e) => setHp(e.target.value)} />
 
       <div className="space-y-8">

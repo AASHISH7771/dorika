@@ -218,6 +218,7 @@ export function CustomArtBuilder({ price, makingTime }: { price: number; makingT
         {/* Honeypot */}
         <input
           type="text" tabIndex={-1} autoComplete="off"
+          data-lpignore="true" data-1p-ignore="true" data-form-type="other"
           className="hp-field" aria-hidden="true"
           name={HONEYPOT_FIELD} value={hp} onChange={(e) => setHp(e.target.value)}
         />

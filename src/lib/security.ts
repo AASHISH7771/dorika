@@ -47,9 +47,16 @@ export function getClientIp(headers: Headers): string {
 
 /**
  * Honeypot: a hidden field that humans never fill. If present & non-empty,
- * silently treat as spam. Field name is deliberately tempting for bots.
+ * silently treat as spam.
+ *
+ * The name is deliberately NON-SEMANTIC. An earlier value ("company_website")
+ * matched Chrome / Safari / password-manager autofill heuristics, so real
+ * customers had the field filled for them and their submissions were silently
+ * discarded as spam — they saw a success screen with an order ID that was
+ * never written to the database. Keep this opaque and never reuse a real-world
+ * field name here.
  */
-export const HONEYPOT_FIELD = "company_website";
+export const HONEYPOT_FIELD = "hp_x7q";
 export function isHoneypotTripped(value: unknown): boolean {
   return typeof value === "string" && value.trim().length > 0;
 }

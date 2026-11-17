@@ -69,6 +69,7 @@ export async function POST(req: NextRequest) {
     .from("custom-photos")
     .upload(photoPath, buffer, { contentType: photo.type, upsert: false });
   if (upErr) {
+    console.error("[custom-requests] photo upload failed:", upErr);
     return NextResponse.json({ error: "Could not upload photo. Please try again." }, { status: 500 });
   }
 
@@ -108,6 +109,7 @@ export async function POST(req: NextRequest) {
     .single();
 
   if (insErr || !request) {
+    console.error("[custom-requests] insert failed:", insErr);
     // best-effort cleanup
     await admin.storage.from("custom-photos").remove([photoPath]);
     return NextResponse.json({ error: "Could not submit request. Please try again." }, { status: 500 });

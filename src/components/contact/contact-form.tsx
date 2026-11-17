@@ -57,6 +57,7 @@ export function ContactForm() {
   return (
     <form onSubmit={submit} className="rounded-2xl border border-charcoal-100 bg-white p-6 shadow-soft sm:p-8">
       <input type="text" tabIndex={-1} autoComplete="off" className="hp-field"
+        data-lpignore="true" data-1p-ignore="true" data-form-type="other"
         aria-hidden="true" name={HONEYPOT_FIELD} value={hp} onChange={(e) => setHp(e.target.value)} />
 
       <div className="grid gap-4 sm:grid-cols-2">
