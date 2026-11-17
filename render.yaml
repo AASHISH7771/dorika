@@ -1,0 +1,30 @@
+services:
+  - type: web
+    name: dorika
+    runtime: node
+    plan: free
+    region: singapore
+    branch: main
+    autoDeploy: true
+    # `npm ci` respects package-lock.json → reproducible builds.
+    buildCommand: npm ci && npm run build
+    # Next reads PORT from the environment, so this binds correctly on Render.
+    startCommand: npm start
+    healthCheckPath: /
+    envVars:
+      - key: NODE_VERSION
+        value: "22.13.0"
+      - key: NEXT_TELEMETRY_DISABLED
+        value: "1"
+      # Everything below is a secret or environment-specific value.
+      # `sync: false` makes Render prompt for it instead of storing it here.
+      - key: NEXT_PUBLIC_SUPABASE_URL
+        sync: false
+      - key: NEXT_PUBLIC_SUPABASE_ANON_KEY
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+      - key: NEXT_PUBLIC_SITE_URL
+        sync: false
+      - key: ADMIN_EMAIL
+        sync: false
