@@ -7,6 +7,7 @@ import { requireCustomerSession } from "@/lib/auth";
 import { getAccountOrder } from "@/lib/account-queries";
 import { StatusBadge, PaymentBadge } from "@/components/admin/ui";
 import { MoneyRow } from "@/components/account/ui";
+import { IMAGES_ENABLED } from "@/lib/config";
 import {
   STATUS_FLOW,
   cn,
@@ -80,7 +81,7 @@ export default async function AccountOrderDetailPage({
               {order.items.map((item) => (
                 <li key={item.id} className="flex items-center gap-3 px-4 py-3.5">
                   <div className="relative h-14 w-14 flex-shrink-0 overflow-hidden rounded-xl bg-cream-300">
-                    {item.image_url ? (
+                    {item.image_url && IMAGES_ENABLED ? (
                       <Image
                         src={item.image_url}
                         alt={item.product_name}

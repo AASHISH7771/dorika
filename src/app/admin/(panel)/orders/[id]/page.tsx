@@ -72,7 +72,7 @@ export default async function OrderDetailPage({ params }: { params: { id: string
                 <div key={it.id} className="flex items-center gap-4 px-5 py-3">
                   <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-lg bg-cream-200">
                     <Image
-                      src={it.image_url || productImage(null)}
+                      src={productImage(it.image_url ? [it.image_url] : null, 0)}
                       alt={it.product_name}
                       fill
                       sizes="56px"

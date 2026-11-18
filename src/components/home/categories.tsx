@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import type { Category } from "@/lib/types";
-import { placeholderConfig } from "@/lib/config";
+import { productImage } from "@/lib/config";
 import { SectionHeading } from "@/components/ui/section-heading";
 
 export function Categories({ categories }: { categories: Category[] }) {
@@ -20,10 +20,10 @@ export function Categories({ categories }: { categories: Category[] }) {
             <Link
               key={c.id}
               href={`/shop?category=${c.slug}`}
-              className="group relative aspect-[4/5] overflow-hidden rounded-2xl shadow-soft"
+              className="group relative aspect-[4/5] overflow-hidden rounded-2xl bg-charcoal-800 shadow-soft"
             >
               <Image
-                src={c.image_url || placeholderConfig.product(`cat-${c.slug}`)}
+                src={productImage(c.image_url ? [c.image_url] : null, 0)}
                 alt={c.name}
                 fill
                 sizes="(max-width:640px) 50vw, 25vw"

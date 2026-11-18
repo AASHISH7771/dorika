@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { Minus, Plus, ShoppingBag, Heart, Zap, Check } from "lucide-react";
 import type { Product } from "@/lib/types";
 import { formatNPR, cn } from "@/lib/utils";
-import { productImage } from "@/lib/config";
+import { productGallery } from "@/lib/config";
 import { useCart } from "@/lib/cart-context";
 import { useWishlist } from "@/lib/wishlist-context";
 
@@ -14,7 +14,7 @@ export function ProductDetailClient({ product }: { product: Product }) {
   const router = useRouter();
   const { addItem, setOpen } = useCart();
   const { has, toggle } = useWishlist();
-  const images = product.images?.length ? product.images : [productImage(null)];
+  const images = productGallery(product.images);
   const [active, setActive] = useState(0);
   const [qty, setQty] = useState(1);
   const [added, setAdded] = useState(false);

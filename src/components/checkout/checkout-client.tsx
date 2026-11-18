@@ -8,6 +8,7 @@ import { useCart } from "@/lib/cart-context";
 import { Field, Input, Textarea } from "@/components/ui/input";
 import { Turnstile } from "@/components/turnstile";
 import { HONEYPOT_FIELD } from "@/lib/security";
+import { IMAGES_ENABLED, BLANK_IMAGE } from "@/lib/config";
 import { formatNPR, cn, isValidNepaliPhone } from "@/lib/utils";
 import type { PaymentMethod, Settings } from "@/lib/types";
 
@@ -175,7 +176,7 @@ export function CheckoutClient({ settings }: { settings: Settings | null }) {
           {items.map((i) => (
             <div key={i.productId} className="flex gap-3">
               <div className="relative h-14 w-14 flex-shrink-0 overflow-hidden rounded-lg bg-cream-200">
-                <Image src={i.image} alt={i.name} fill sizes="56px" className="object-cover" />
+                <Image src={IMAGES_ENABLED ? i.image : BLANK_IMAGE} alt={i.name} fill sizes="56px" className="object-cover" />
                 <span className="absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-charcoal-800 px-1 text-[11px] font-bold text-white">
                   {i.quantity}
                 </span>

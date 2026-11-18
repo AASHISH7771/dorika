@@ -50,22 +50,49 @@ export function whatsappLink(message?: string) {
   return `${siteConfig.contact.whatsappUrl}?text=${text}`;
 }
 
+// ── Image kill switch ────────────────────────────────────────
+// TEMPORARY — performance test. Set back to `true` to restore every
+// product / category / marketing image in one line.
+//
+// While `false`, every image except the hero (public/hero.webp) resolves to a
+// 1x1 transparent SVG data URI: no network request, no bytes, no layout shift
+// (the containers keep their aspect ratio and cream background).
+export const IMAGES_ENABLED = false;
+
+/** 1x1 transparent SVG — renders instantly and downloads nothing. */
+export const BLANK_IMAGE =
+  "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'1'%20height%3D'1'%2F%3E";
+
 // ── Placeholder image config ─────────────────────────────────
 // Everything funnels through here so real photos are a one-line swap,
 // or override per-product via the admin panel.
 export const placeholderConfig = {
   // Deterministic placeholder from a seed string
   product: (seed: string, size = 900) =>
-    `https://picsum.photos/seed/${encodeURIComponent(seed)}/${size}/${size}`,
+    IMAGES_ENABLED
+      ? `https://picsum.photos/seed/${encodeURIComponent(seed)}/${size}/${size}`
+      : BLANK_IMAGE,
   wide: (seed: string) =>
-    `https://picsum.photos/seed/${encodeURIComponent(seed)}/1600/900`,
+    IMAGES_ENABLED
+      ? `https://picsum.photos/seed/${encodeURIComponent(seed)}/1600/900`
+      : BLANK_IMAGE,
   // Fallback when a product has no images at all
-  fallback: "https://picsum.photos/seed/dorika-fallback/900/900",
+  fallback: IMAGES_ENABLED
+    ? "https://picsum.photos/seed/dorika-fallback/900/900"
+    : BLANK_IMAGE,
 };
 
 export function productImage(images: string[] | null | undefined, index = 0) {
+  if (!IMAGES_ENABLED) return BLANK_IMAGE;
   if (images && images.length > index && images[index]) return images[index];
   return placeholderConfig.fallback;
+}
+
+/** Gallery for the product page. Empty-ish when images are disabled. */
+export function productGallery(images: string[] | null | undefined): string[] {
+  if (!IMAGES_ENABLED) return [BLANK_IMAGE];
+  if (images && images.length) return images;
+  return [placeholderConfig.fallback];
 }
 
 // Nav links (shared by navbar + footer)
