@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Minus, Plus, Trash2, ShoppingBag, ArrowRight } from "lucide-react";
 import { useCart } from "@/lib/cart-context";
-import { IMAGES_ENABLED, BLANK_IMAGE } from "@/lib/config";
+import { displayImage } from "@/lib/config";
 import { formatNPR } from "@/lib/utils";
 
 export default function CartPage() {
@@ -35,7 +35,7 @@ export default function CartPage() {
               {items.map((item) => (
                 <div key={item.productId} className="flex gap-4 rounded-2xl border border-charcoal-100 bg-white p-4">
                   <Link href={`/product/${item.slug}`} className="relative h-24 w-24 flex-shrink-0 overflow-hidden rounded-xl bg-cream-200">
-                    <Image src={IMAGES_ENABLED ? item.image : BLANK_IMAGE} alt={item.name} fill sizes="96px" className="object-cover" />
+                    <Image src={displayImage(item.image)} alt={item.name} fill sizes="96px" className="object-cover" />
                   </Link>
                   <div className="flex flex-1 flex-col">
                     <Link href={`/product/${item.slug}`} className="font-semibold hover:text-terracotta-600">

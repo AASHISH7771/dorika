@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { X, Plus, Minus, Trash2, ShoppingBag } from "lucide-react";
 import { useCart } from "@/lib/cart-context";
-import { IMAGES_ENABLED, BLANK_IMAGE } from "@/lib/config";
+import { displayImage } from "@/lib/config";
 import { formatNPR } from "@/lib/utils";
 import { cn } from "@/lib/utils";
 
@@ -66,7 +66,7 @@ export function CartDrawer() {
                     className="relative h-20 w-20 flex-shrink-0 overflow-hidden rounded-xl bg-cream-200"
                   >
                     <Image
-                      src={IMAGES_ENABLED ? item.image : BLANK_IMAGE}
+                      src={displayImage(item.image)}
                       alt={item.name}
                       fill
                       sizes="80px"

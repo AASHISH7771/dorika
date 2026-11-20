@@ -29,13 +29,13 @@ select * from (
     'custom-string-face-art'::text,
     'Our signature piece. Send us a face photo and we hand-weave it into stunning monochrome string art on a 45cm diameter round wooden plank. A deeply personal gift that lasts a lifetime.'::text,
     3500::numeric, 4500::numeric, (select face from c),
-    array['https://picsum.photos/seed/dorika-p1/900/900','https://picsum.photos/seed/dorika-p1b/900/900','https://picsum.photos/seed/dorika-p1c/900/900'],
+    array['/products/custom-string-face-art.jpg'],
     '45cm diameter round plank'::text, 99, true, true
   union all select
     'Himalaya Peaks Wall Art','himalaya-peaks-wall-art',
     'The silhouette of the Himalayas rendered in fine terracotta thread on a deep charcoal board. A tribute to Nepal''s mountains.',
     2800, 3200, (select wall from c),
-    array['https://picsum.photos/seed/dorika-p2/900/900','https://picsum.photos/seed/dorika-p2b/900/900'],
+    array['/products/himalaya-peaks-wall-art.jpg'],
     '40 x 60 cm', 12, true, false
   union all select
     'Mandala Thread Circle','mandala-thread-circle',
@@ -95,7 +95,7 @@ select * from (
     'Couple Portrait Face Art — 45cm','couple-portrait-face-art',
     'The two-face version of our signature piece. Send a photo of the couple and we weave you both together on a 45cm plank.',
     5500, 6500, (select face from c),
-    array['https://picsum.photos/seed/dorika-p12/900/900','https://picsum.photos/seed/dorika-p12b/900/900'],
+    array['/products/couple-portrait-face-art.jpg'],
     '45cm diameter round plank', 50, true, true
 ) as rows
 on conflict (slug) do nothing;

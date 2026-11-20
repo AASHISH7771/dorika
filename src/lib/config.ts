@@ -50,49 +50,70 @@ export function whatsappLink(message?: string) {
   return `${siteConfig.contact.whatsappUrl}?text=${text}`;
 }
 
-// ── Image kill switch ────────────────────────────────────────
-// TEMPORARY — performance test. Set back to `true` to restore every
-// product / category / marketing image in one line.
+// ── Placeholder images ───────────────────────────────────────
+// Stock placeholder photos are suppressed on purpose.
 //
-// While `false`, every image except the hero (public/hero.webp) resolves to a
-// 1x1 transparent SVG data URI: no network request, no bytes, no layout shift
-// (the containers keep their aspect ratio and cream background).
-export const IMAGES_ENABLED = false;
+// Reason: they are fetched from a third party and, historically, resized on
+// demand by a host with 0.1 CPU — which cost up to 5s per image. Real photos
+// live in public/products/ and are served as plain static files, so they are
+// always shown. Anything still pointing at a stock placeholder renders as an
+// empty cream tile instead of downloading someone else's photo.
+//
+// Set to `false` to let the stock placeholders show again (e.g. on a fresh
+// seed with no real photos yet).
+export const HIDE_PLACEHOLDER_IMAGES = true;
 
 /** 1x1 transparent SVG — renders instantly and downloads nothing. */
 export const BLANK_IMAGE =
   "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20width%3D'1'%20height%3D'1'%2F%3E";
 
-// ── Placeholder image config ─────────────────────────────────
-// Everything funnels through here so real photos are a one-line swap,
-// or override per-product via the admin panel.
+/** Hosts that serve throwaway stock placeholders, never real catalogue art. */
+const PLACEHOLDER_HOSTS = ["picsum.photos", "images.unsplash.com"];
+
+function isPlaceholderUrl(url: string): boolean {
+  return PLACEHOLDER_HOSTS.some((h) => url.includes(h));
+}
+
+/**
+ * Resolve any stored image URL to something safe to render.
+ * Real photos pass through untouched; placeholders become the blank tile.
+ */
+export function displayImage(url: string | null | undefined): string {
+  if (!url) return BLANK_IMAGE;
+  if (HIDE_PLACEHOLDER_IMAGES && isPlaceholderUrl(url)) return BLANK_IMAGE;
+  return url;
+}
+
+/** True when the URL is a real photo that should be shown as an image. */
+export function hasRealImage(url: string | null | undefined): boolean {
+  return !!url && !(HIDE_PLACEHOLDER_IMAGES && isPlaceholderUrl(url));
+}
+
 export const placeholderConfig = {
   // Deterministic placeholder from a seed string
   product: (seed: string, size = 900) =>
-    IMAGES_ENABLED
-      ? `https://picsum.photos/seed/${encodeURIComponent(seed)}/${size}/${size}`
-      : BLANK_IMAGE,
+    HIDE_PLACEHOLDER_IMAGES
+      ? BLANK_IMAGE
+      : `https://picsum.photos/seed/${encodeURIComponent(seed)}/${size}/${size}`,
   wide: (seed: string) =>
-    IMAGES_ENABLED
-      ? `https://picsum.photos/seed/${encodeURIComponent(seed)}/1600/900`
-      : BLANK_IMAGE,
+    HIDE_PLACEHOLDER_IMAGES
+      ? BLANK_IMAGE
+      : `https://picsum.photos/seed/${encodeURIComponent(seed)}/1600/900`,
   // Fallback when a product has no images at all
-  fallback: IMAGES_ENABLED
-    ? "https://picsum.photos/seed/dorika-fallback/900/900"
-    : BLANK_IMAGE,
+  fallback: HIDE_PLACEHOLDER_IMAGES
+    ? BLANK_IMAGE
+    : "https://picsum.photos/seed/dorika-fallback/900/900",
 };
 
 export function productImage(images: string[] | null | undefined, index = 0) {
-  if (!IMAGES_ENABLED) return BLANK_IMAGE;
-  if (images && images.length > index && images[index]) return images[index];
-  return placeholderConfig.fallback;
+  const url = images && images.length > index ? images[index] : undefined;
+  return displayImage(url ?? placeholderConfig.fallback);
 }
 
-/** Gallery for the product page. Empty-ish when images are disabled. */
+/** Gallery for the product page. */
 export function productGallery(images: string[] | null | undefined): string[] {
-  if (!IMAGES_ENABLED) return [BLANK_IMAGE];
-  if (images && images.length) return images;
-  return [placeholderConfig.fallback];
+  const list = (images ?? []).filter(Boolean).map(displayImage);
+  return list.length ? list : [placeholderConfig.fallback];
 }
 
 // Nav links (shared by navbar + footer)
