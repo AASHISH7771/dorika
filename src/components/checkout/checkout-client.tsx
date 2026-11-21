@@ -21,6 +21,7 @@ export function CheckoutClient({ settings }: { settings: Settings | null }) {
     address: "", landmark: "", notes: "",
   });
   const [payment, setPayment] = useState<PaymentMethod>("cod");
+  const [reference, setReference] = useState("");
   const [token, setToken] = useState("");
   const [hp, setHp] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -53,6 +54,10 @@ export function CheckoutClient({ settings }: { settings: Settings | null }) {
       setError("Please enter your delivery district and address.");
       return;
     }
+    if (payment !== "cod" && !reference.trim()) {
+      setError("Please paste the transaction ID from your payment so we can confirm the order.");
+      return;
+    }
     setSubmitting(true);
     try {
       const res = await fetch("/api/orders", {
@@ -61,6 +66,7 @@ export function CheckoutClient({ settings }: { settings: Settings | null }) {
         body: JSON.stringify({
           ...form,
           payment_method: payment,
+          payment_reference: reference.trim() || null,
           items,
           turnstileToken: token,
           [HONEYPOT_FIELD]: hp,
@@ -148,23 +154,68 @@ export function CheckoutClient({ settings }: { settings: Settings | null }) {
             ))}
           </div>
 
-          {payment === "bank_transfer" && (
-            <div className="mt-4 flex gap-4 rounded-xl bg-cream-200 p-4 text-sm">
-              <QrCode className="h-10 w-10 flex-shrink-0 text-charcoal-400" />
-              <div>
-                <p className="font-semibold">Bank transfer details</p>
-                <p className="text-charcoal-500">
-                  Bank &amp; QR details are shown here once configured in the admin panel.
-                  We&apos;ll also confirm them on WhatsApp after you order.
+          {payment !== "cod" && (
+            <div className="mt-4 rounded-xl bg-cream-200 p-4 text-sm">
+              <p className="font-semibold text-charcoal-800">
+                {payment === "bank_transfer"
+                  ? "Pay by bank transfer or QR"
+                  : `Pay with ${payment === "esewa" ? "eSewa" : "Khalti"}`}
+              </p>
+
+              {payment === "esewa" && (
+                <p className="mt-1 text-charcoal-500">
+                  Send <strong>{formatNPR(total)}</strong> to eSewa{" "}
+                  <span className="font-mono font-semibold text-charcoal-800">
+                    {settings?.esewa_id || "— add your eSewa number in admin settings —"}
+                  </span>
                 </p>
+              )}
+              {payment === "khalti" && (
+                <p className="mt-1 text-charcoal-500">
+                  Send <strong>{formatNPR(total)}</strong> to Khalti{" "}
+                  <span className="font-mono font-semibold text-charcoal-800">
+                    {settings?.khalti_id || "— add your Khalti number in admin settings —"}
+                  </span>
+                </p>
+              )}
+              {payment === "bank_transfer" && (
+                <div className="mt-1 space-y-1 text-charcoal-500">
+                  <p>
+                    Transfer <strong>{formatNPR(total)}</strong> to:
+                  </p>
+                  <p className="font-mono font-semibold text-charcoal-800">
+                    {settings?.bank_name || "—"}
+                    {settings?.bank_account_number
+                      ? ` · ${settings.bank_account_number}`
+                      : " · add account in admin settings"}
+                  </p>
+                  {settings?.bank_account_name && <p>{settings.bank_account_name}</p>}
+                  {settings?.bank_qr_url && (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={settings.bank_qr_url}
+                      alt="Bank QR code"
+                      className="mt-2 h-40 w-40 rounded-lg bg-white object-contain p-2"
+                    />
+                  )}
+                </div>
+              )}
+
+              {settings?.payment_note && (
+                <p className="mt-2 text-xs text-charcoal-400">{settings.payment_note}</p>
+              )}
+
+              <div className="mt-3">
+                <Field label="Transaction ID" htmlFor="payment_reference" hint="Paste the id from your payment receipt">
+                  <Input
+                    id="payment_reference"
+                    value={reference}
+                    onChange={(e) => setReference(e.target.value)}
+                    placeholder="e.g. 8H4K2L9M"
+                  />
+                </Field>
               </div>
             </div>
-          )}
-          {(payment === "esewa" || payment === "khalti") && (
-            <p className="mt-4 rounded-xl bg-cream-200 p-4 text-sm text-charcoal-500">
-              You&apos;ll be guided to complete the {payment === "esewa" ? "eSewa" : "Khalti"} payment
-              after placing the order. (Gateway keys are added in the admin settings.)
-            </p>
           )}
         </section>
       </div>

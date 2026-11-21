@@ -62,6 +62,23 @@ export default async function OrderDetailPage({ params }: { params: { id: string
         <span className="text-sm text-charcoal-400">{formatDateTime(order.created_at)}</span>
       </div>
 
+      {order.payment_reference && (
+        <div className="mb-6 flex flex-wrap items-center gap-2 rounded-xl border border-terracotta-200 bg-terracotta-50 px-4 py-3 text-sm">
+          <span className="font-semibold text-charcoal-700">
+            {order.payment_method === "bank_transfer"
+              ? "Bank transfer"
+              : order.payment_method === "esewa"
+                ? "eSewa"
+                : "Khalti"}{" "}
+            txn ID:
+          </span>
+          <code className="rounded bg-white px-2 py-0.5 font-mono font-bold text-charcoal-800">
+            {order.payment_reference}
+          </code>
+          <span className="text-charcoal-500">— match this against your statement, then mark paid.</span>
+        </div>
+      )}
+
       <div className="grid gap-6 lg:grid-cols-3">
         {/* Left: items + customer */}
         <div className="space-y-6 lg:col-span-2">

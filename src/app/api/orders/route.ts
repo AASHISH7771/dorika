@@ -24,6 +24,7 @@ interface OrderBody {
   items: CartItem[];
   [HONEYPOT_FIELD]?: string;
   turnstileToken?: string;
+  payment_reference?: string | null;
 }
 
 export async function POST(req: NextRequest) {
@@ -59,6 +60,17 @@ export async function POST(req: NextRequest) {
   }
   if (!Array.isArray(body.items) || body.items.length === 0) {
     return NextResponse.json({ error: "Your cart is empty." }, { status: 400 });
+  }
+
+  // Non-COD orders are paid manually to the shop wallet or bank account, so we
+  // need the transaction id to reconcile the transfer against the statement.
+  const isManualPayment = (body.payment_method ?? "cod") !== "cod";
+  const reference = String(body.payment_reference ?? "").trim().slice(0, 120);
+  if (isManualPayment && !reference) {
+    return NextResponse.json(
+      { error: "Please paste the transaction ID from your payment." },
+      { status: 400 }
+    );
   }
 
   const admin = createAdminClient();
@@ -121,6 +133,10 @@ export async function POST(req: NextRequest) {
       delivery_fee: deliveryFee,
       total,
       payment_method: body.payment_method ?? "cod",
+      // COD settles on delivery; manual transfers stay pending until the owner
+      // confirms them against the wallet/bank statement.
+      payment_status: isManualPayment ? "pending" : "unpaid",
+      payment_reference: reference || null,
       status: "pending",
     })
     .select()

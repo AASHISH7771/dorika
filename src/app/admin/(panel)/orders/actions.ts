@@ -34,7 +34,11 @@ export async function updateOrderPayment(formData: FormData) {
   if (!id || !payment_status) return;
 
   const supabase = createClient();
-  await supabase.from("orders").update({ payment_status }).eq("id", id);
+  await supabase.from("orders").update({
+    payment_status,
+    // Stamp the confirmation time so a day's transfers can be reconciled later.
+    paid_at: payment_status === "paid" ? new Date().toISOString() : null,
+  }).eq("id", id);
 
   revalidatePath(`/admin/orders/${id}`);
   revalidatePath("/admin/orders");

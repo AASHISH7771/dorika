@@ -76,6 +76,9 @@ export interface Order {
   status: OrderStatus;
   payment_method: PaymentMethod;
   payment_status: PaymentStatus;
+  /** Transaction id the customer typed after paying manually. */
+  payment_reference: string | null;
+  paid_at: string | null;
   created_at: string;
   updated_at: string;
   order_items?: OrderItem[];
@@ -139,6 +142,14 @@ export interface Settings {
   esewa_enabled: boolean;
   khalti_enabled: boolean;
   bank_enabled: boolean;
+  // Manual payment destinations (see supabase/04_payments.sql)
+  esewa_id: string | null;
+  khalti_id: string | null;
+  bank_name: string | null;
+  bank_account_name: string | null;
+  bank_account_number: string | null;
+  bank_qr_url: string | null;
+  payment_note: string | null;
   updated_at: string;
 }
 

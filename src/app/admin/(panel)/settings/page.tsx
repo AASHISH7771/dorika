@@ -26,6 +26,13 @@ export default async function SettingsPage({ searchParams }: { searchParams: { s
     esewa_enabled: s?.esewa_enabled ?? false,
     khalti_enabled: s?.khalti_enabled ?? false,
     bank_enabled: s?.bank_enabled ?? true,
+    esewa_id: s?.esewa_id ?? "",
+    khalti_id: s?.khalti_id ?? "",
+    bank_name: s?.bank_name ?? "",
+    bank_account_name: s?.bank_account_name ?? "",
+    bank_account_number: s?.bank_account_number ?? "",
+    bank_qr_url: s?.bank_qr_url ?? "",
+    payment_note: s?.payment_note ?? "",
   };
 
   return (
@@ -112,9 +119,34 @@ export default async function SettingsPage({ searchParams }: { searchParams: { s
             <PaymentToggle name="esewa_enabled" label="eSewa" defaultChecked={v.esewa_enabled} />
             <PaymentToggle name="khalti_enabled" label="Khalti" defaultChecked={v.khalti_enabled} />
           </div>
+          <div className="mt-5 grid gap-4 border-t border-charcoal-100 pt-5 sm:grid-cols-2">
+            <Field label="eSewa ID / number" htmlFor="esewa_id" hint="Shown at checkout when eSewa is on">
+              <Input id="esewa_id" name="esewa_id" defaultValue={v.esewa_id ?? ""} placeholder="98XXXXXXXX" />
+            </Field>
+            <Field label="Khalti ID / number" htmlFor="khalti_id" hint="Shown at checkout when Khalti is on">
+              <Input id="khalti_id" name="khalti_id" defaultValue={v.khalti_id ?? ""} placeholder="98XXXXXXXX" />
+            </Field>
+            <Field label="Bank name" htmlFor="bank_name">
+              <Input id="bank_name" name="bank_name" defaultValue={v.bank_name ?? ""} placeholder="Global IME Bank" />
+            </Field>
+            <Field label="Account holder name" htmlFor="bank_account_name">
+              <Input id="bank_account_name" name="bank_account_name" defaultValue={v.bank_account_name ?? ""} />
+            </Field>
+            <Field label="Account number" htmlFor="bank_account_number">
+              <Input id="bank_account_number" name="bank_account_number" defaultValue={v.bank_account_number ?? ""} />
+            </Field>
+            <Field label="Bank QR image URL" htmlFor="bank_qr_url" hint="Optional — paste a link or /path/to.png">
+              <Input id="bank_qr_url" name="bank_qr_url" defaultValue={v.bank_qr_url ?? ""} />
+            </Field>
+            <div className="sm:col-span-2">
+              <Field label="Payment note" htmlFor="payment_note" hint="Extra instructions shown to the customer">
+                <Textarea id="payment_note" name="payment_note" defaultValue={v.payment_note ?? ""} placeholder="After paying, send the screenshot on WhatsApp so we can confirm faster." />
+              </Field>
+            </div>
+          </div>
           <p className="mt-3 text-xs text-charcoal-400">
-            eSewa and Khalti appear at checkout when enabled, but online payment capture is not wired yet
-            (structure is ready for your keys).
+            Payments are collected manually: the customer transfers to the details above and enters the
+            transaction id at checkout. You confirm each order with “Mark as paid”.
           </p>
         </fieldset>
 

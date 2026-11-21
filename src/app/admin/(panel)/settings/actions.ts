@@ -3,6 +3,12 @@
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 
+/** Trim a field and turn "" into null. */
+function text(value: FormDataEntryValue | null): string | null {
+  const v = String(value ?? "").trim();
+  return v.length ? v : null;
+}
+
 export async function saveSettings(formData: FormData) {
   const supabase = createClient();
 
@@ -23,6 +29,15 @@ export async function saveSettings(formData: FormData) {
     esewa_enabled: formData.get("esewa_enabled") === "on",
     khalti_enabled: formData.get("khalti_enabled") === "on",
     bank_enabled: formData.get("bank_enabled") === "on",
+    // Manual payment destinations — blank strings become null so checkout
+    // can treat "not configured" and "cleared" the same way.
+    esewa_id: text(formData.get("esewa_id")),
+    khalti_id: text(formData.get("khalti_id")),
+    bank_name: text(formData.get("bank_name")),
+    bank_account_name: text(formData.get("bank_account_name")),
+    bank_account_number: text(formData.get("bank_account_number")),
+    bank_qr_url: text(formData.get("bank_qr_url")),
+    payment_note: text(formData.get("payment_note")),
   };
 
   await supabase.from("settings").update(payload).eq("id", 1);
