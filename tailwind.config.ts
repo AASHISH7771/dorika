@@ -26,7 +26,9 @@ const config: Config = {
           100: "#e6e7e9",
           200: "#c3c6ca",
           300: "#9ea3a9",
-          400: "#6b7177",
+          // Nudged darker so muted copy still clears WCAG AA (4.5:1) on the
+          // warmer cream backgrounds below. Was #6b7177.
+          400: "#666c72",
           500: "#474c52",
           600: "#34383d",
           700: "#24272B",
@@ -46,11 +48,14 @@ const config: Config = {
           800: "#6f301b",
           900: "#5c2a19",
         },
+        // Warm paper tones. cream-100 is the page canvas — it used to be
+        // #FFFDFB, which read as plain white on screen; these are noticeably
+        // creamier while keeping charcoal body text well above AA contrast.
         cream: {
-          DEFAULT: "#FBF8F4",
-          100: "#FFFDFB",
-          200: "#FBF8F4",
-          300: "#F3ECE3",
+          DEFAULT: "#FAF3E9",
+          100: "#FBF5EC",
+          200: "#F7EEE2",
+          300: "#EFE2D0",
         },
         whatsapp: "#25D366",
       },
