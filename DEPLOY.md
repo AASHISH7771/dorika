@@ -60,7 +60,11 @@ entered in the host's dashboard instead.
 1. [render.com](https://render.com) → sign up with GitHub.
 2. **New → Blueprint** → pick the `dorika` repo. Render reads `render.yaml` automatically.
 3. It will prompt for the five `sync: false` variables — paste the same values as the table
-   above, with `NEXT_PUBLIC_SITE_URL` = `https://dorika.onrender.com`.
+   above, with `NEXT_PUBLIC_SITE_URL` = `https://dorika.shop`.
+
+   > `*.onrender.com` is assigned automatically and cannot be removed. It is kept
+   > only as an internal fallback — `src/middleware.ts` permanently redirects it to
+   > the canonical domain, and `/api/*` is exempt so health probes still answer.
 4. **Apply** → it builds and starts.
 
 Manual alternative (no blueprint): **New → Web Service** → repo → Runtime **Node**,

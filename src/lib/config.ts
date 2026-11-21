@@ -2,12 +2,29 @@
 //  Dorika — global site configuration & brand constants
 // ─────────────────────────────────────────────────────────────
 
+/**
+ * Public base URL used for canonical tags, Open Graph metadata and the
+ * Supabase auth redirects.
+ *
+ * In production we fall back to the real domain rather than localhost, so a
+ * missing env var produces a correct link instead of a broken one. The
+ * deployed value should still be set explicitly — `NEXT_PUBLIC_*` vars are
+ * baked in at build time, so changing it requires a redeploy.
+ */
+function resolveSiteUrl(): string {
+  const fromEnv = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "");
+  if (fromEnv) return fromEnv;
+  return process.env.NODE_ENV === "production"
+    ? "https://dorika.shop"
+    : "http://localhost:3000";
+}
+
 export const siteConfig = {
   name: "Dorika",
   tagline: "Handmade string art from the heart of Nepal",
   description:
     "Dorika crafts handmade string art in Nepal — including custom String Face Art woven from your photo on a 45cm plank. Delivered across Nepal.",
-  url: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
+  url: resolveSiteUrl(),
 
   contact: {
     phone: "9708285877",

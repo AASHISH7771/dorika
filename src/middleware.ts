@@ -1,15 +1,62 @@
-import { type NextRequest } from "next/server";
+import { NextResponse, type NextRequest } from "next/server";
 import { updateSession } from "@/lib/supabase/middleware";
 
+/**
+ * The only host we want customers to see.
+ *
+ * Render assigns `<service>.onrender.com` automatically and it cannot be
+ * deleted — it lives as long as the service does. So instead of trying to
+ * remove it, we make it invisible: anything arriving on that host is
+ * permanently redirected here, which keeps a single canonical URL for
+ * visitors, shared links and search engines.
+ */
+const CANONICAL_HOST = "dorika.shop";
+
+/**
+ * Paths that must keep answering on *every* host, never redirect:
+ *   /api/*   — Render's health probe lives at /api/health, and uptime
+ *              monitors hit it directly. Redirecting would turn a clean
+ *              200 into a 3xx and confuse both.
+ *   /_next/* — build assets; the browser asks for these on whatever host
+ *              it already loaded the page from.
+ */
+function isHostAgnostic(pathname: string): boolean {
+  return pathname.startsWith("/api/") || pathname.startsWith("/_next/");
+}
+
 export async function middleware(request: NextRequest) {
-  return await updateSession(request);
+  const pathname = request.nextUrl.pathname;
+  const host = (request.headers.get("host") ?? "").toLowerCase();
+
+  const isRenderSubdomain = host.endsWith(".onrender.com");
+
+  // 308 keeps the method and body intact for any non-GET request, so a
+  // POST that lands on the old host still reaches the right handler.
+  if (
+    process.env.NODE_ENV === "production" &&
+    isRenderSubdomain &&
+    !isHostAgnostic(pathname)
+  ) {
+    const url = request.nextUrl.clone();
+    url.protocol = "https:";
+    url.host = CANONICAL_HOST;
+    url.port = "";
+    return NextResponse.redirect(url, 308);
+  }
+
+  // Session refresh + auth guards are only needed on the protected areas.
+  // The storefront is anonymous browsing and gets no middleware work.
+  if (pathname.startsWith("/admin") || pathname.startsWith("/account")) {
+    return await updateSession(request);
+  }
+
+  return NextResponse.next();
 }
 
 export const config = {
   matcher: [
-    // Only run session refresh + auth guards on the protected areas.
-    // ~99% of traffic is anonymous storefront browsing, which needs neither.
-    "/admin/:path*",
-    "/account/:path*",
+    // Everything except static files and image assets — those are served
+    // as-is from whichever host the page was loaded on.
+    "/((?!_next/static|_next/image|favicon\\.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico|txt|xml|webmanifest)$).*)",
   ],
 };
