@@ -26,7 +26,6 @@ export function Testimonials() {
         <SectionHeading
           eyebrow="Loved by customers"
           title="What people are saying"
-          subtitle="Real keepsakes, real reactions. (Sample reviews shown for demo.)"
         />
         <div className="grid gap-6 lg:grid-cols-3">
           {testimonials.map((t) => (
