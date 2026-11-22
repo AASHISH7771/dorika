@@ -1,15 +1,19 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { FaqAccordion } from "@/components/faq-accordion";
+import { JsonLd } from "@/components/json-ld";
+import { faqSchema, pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "FAQ",
   description: "Answers to common questions about ordering, custom String Face Art, payment, delivery and returns.",
-};
+  path: "/faq",
+});
 
 export default function FaqPage() {
   return (
     <div className="bg-cream-100">
+      <JsonLd data={faqSchema()} />
       <div className="border-b border-charcoal-100 bg-white">
         <div className="container-page py-10 text-center">
           <p className="eyebrow mb-2">Help centre</p>

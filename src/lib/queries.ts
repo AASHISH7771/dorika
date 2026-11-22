@@ -134,6 +134,33 @@ export async function getProductsByIds(ids: string[]): Promise<Product[]> {
   }
 }
 
+export interface SitemapProduct {
+  slug: string;
+  updated_at: string | null;
+}
+
+/**
+ * Slug + real last-modified date for the sitemap.
+ *
+ * The sitemap used to stamp every URL with `new Date()` at build time, so all
+ * 22 URLs claimed to have changed on every deploy. Google learns to ignore a
+ * `lastmod` that behaves like that, which costs the freshness signal on the
+ * few pages that genuinely do change.
+ */
+export async function getProductsForSitemap(): Promise<SitemapProduct[]> {
+  try {
+    const supabase = createPublicClient();
+    const { data } = await supabase
+      .from("products")
+      .select("slug, updated_at")
+      .eq("is_active", true)
+      .order("updated_at", { ascending: false });
+    return (data as SitemapProduct[]) ?? [];
+  } catch {
+    return [];
+  }
+}
+
 export async function getAllProductSlugs(): Promise<string[]> {
   try {
     const supabase = createPublicClient();

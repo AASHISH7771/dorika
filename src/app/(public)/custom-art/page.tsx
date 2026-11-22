@@ -1,15 +1,18 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { Ruler, Clock, BadgeCheck } from "lucide-react";
 import { CustomArtBuilder } from "@/components/custom-art/custom-art-builder";
 import { getSettings } from "@/lib/queries";
 import { siteConfig } from "@/lib/config";
 import { formatNPR } from "@/lib/utils";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Custom String Face Art",
   description:
     "Upload a face photo and we'll hand-craft it into string art on a 45cm round plank. No account needed. Delivered across Nepal.",
-};
+  path: "/custom-art",
+  image: "/products/custom-string-face-art.jpg",
+});
 
 export default async function CustomArtPage() {
   const settings = await getSettings();

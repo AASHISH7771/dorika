@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { LegalLayout, LegalSection } from "@/components/legal-layout";
 import { siteConfig } from "@/lib/config";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Privacy Policy",
   description: "How Dorika collects, uses and protects your personal information.",
-};
+  path: "/privacy",
+});
 
 export default function PrivacyPage() {
   return (

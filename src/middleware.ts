@@ -29,6 +29,28 @@ export async function middleware(request: NextRequest) {
   const host = (request.headers.get("host") ?? "").toLowerCase();
 
   const isRenderSubdomain = host.endsWith(".onrender.com");
+  const isWww = host === `www.${CANONICAL_HOST}`;
+
+  /**
+   * www → apex, 301.
+   *
+   * The wildcard certificate now validates, so www.dorika.shop answers 200
+   * with an identical copy of the site. Left alone that is a textbook
+   * duplicate-content setup — two hosts, same bytes. The canonical tag is the
+   * hint; this redirect is the instruction. 301 (not 308) because www → apex
+   * is a permanent, semantic move rather than a method-preserving replay.
+   */
+  if (
+    process.env.NODE_ENV === "production" &&
+    isWww &&
+    !isHostAgnostic(pathname)
+  ) {
+    const url = request.nextUrl.clone();
+    url.protocol = "https:";
+    url.host = CANONICAL_HOST;
+    url.port = "";
+    return NextResponse.redirect(url, 301);
+  }
 
   // 308 keeps the method and body intact for any non-GET request, so a
   // POST that lands on the old host still reaches the right handler.

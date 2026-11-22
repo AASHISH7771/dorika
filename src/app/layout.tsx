@@ -2,7 +2,9 @@ import type { Metadata, Viewport } from "next";
 import { Nunito, Quicksand } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/components/providers";
+import { JsonLd } from "@/components/json-ld";
 import { siteConfig } from "@/lib/config";
+import { absoluteUrl, DEFAULT_OG_IMAGE, organizationSchema, websiteSchema } from "@/lib/seo";
 
 const nunito = Nunito({
   subsets: ["latin"],
@@ -32,6 +34,7 @@ export const metadata: Metadata = {
       { url: "/favicon.svg", type: "image/svg+xml" },
     ],
   },
+  alternates: { canonical: absoluteUrl("/") },
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -39,11 +42,15 @@ export const metadata: Metadata = {
     siteName: siteConfig.name,
     title: `${siteConfig.name} — ${siteConfig.tagline}`,
     description: siteConfig.description,
+    images: [
+      { url: absoluteUrl(DEFAULT_OG_IMAGE), width: 900, height: 900, alt: siteConfig.name },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: `${siteConfig.name} — ${siteConfig.tagline}`,
     description: siteConfig.description,
+    images: [absoluteUrl(DEFAULT_OG_IMAGE)],
   },
   robots: { index: true, follow: true },
 };
@@ -60,6 +67,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${nunito.variable} ${quicksand.variable}`}>
       <body>
+        {/* Brand + site entities, read by Google on every page. */}
+        <JsonLd data={organizationSchema()} />
+        <JsonLd data={websiteSchema()} />
         <Providers>{children}</Providers>
       </body>
     </html>

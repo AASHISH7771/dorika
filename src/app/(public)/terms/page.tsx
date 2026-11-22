@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { LegalLayout, LegalSection } from "@/components/legal-layout";
 import { siteConfig } from "@/lib/config";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Terms of Service",
   description: "The terms that apply when you shop with Dorika.",
-};
+  path: "/terms",
+});
 
 export default function TermsPage() {
   return (

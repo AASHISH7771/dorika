@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import Image from "next/image";
 import Link from "next/link";
 import { Heart, Target, Sparkles, Hand, Leaf, Users } from "lucide-react";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { placeholderConfig, siteConfig } from "@/lib/config";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "About Us",
   description: "The story behind Dorika — a family string-art craft from Khairenitar, Tanahun, Nepal.",
-};
+  path: "/about",
+});
 
 const values = [
   { icon: Hand, title: "Handmade, always", desc: "No machines. Every piece is wound by hand, nail by nail." },

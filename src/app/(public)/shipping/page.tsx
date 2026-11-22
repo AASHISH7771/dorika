@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { LegalLayout, LegalSection } from "@/components/legal-layout";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Shipping & Returns",
   description: "Delivery across Nepal, timelines, and our returns policy for handmade string art.",
-};
+  path: "/shipping",
+});
 
 export default function ShippingPage() {
   return (

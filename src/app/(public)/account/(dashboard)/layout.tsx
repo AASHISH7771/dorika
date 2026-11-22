@@ -1,9 +1,21 @@
+import type { Metadata } from "next";
 import { requireCustomerSession } from "@/lib/auth";
 import { getAccountProfile } from "@/lib/account-queries";
 import { AccountNav } from "@/components/account/account-nav";
 import { signOutCustomer } from "../actions";
 
 export const dynamic = "force-dynamic";
+
+/**
+ * Every dashboard page is per-customer. robots.txt already blocks /account,
+ * but that only stops crawling — a disallowed URL that is linked from
+ * somewhere can still be indexed without its content being read. noindex is
+ * the actual guarantee, so it is declared once here for the whole section.
+ */
+export const metadata: Metadata = {
+  title: "My Account",
+  robots: { index: false, follow: false },
+};
 
 export default async function AccountDashboardLayout({
   children,

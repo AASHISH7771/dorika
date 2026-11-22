@@ -5,10 +5,20 @@ import { Categories } from "@/components/home/categories";
 import { Testimonials } from "@/components/home/testimonials";
 import { WhyDorika } from "@/components/home/why-dorika";
 import { CtaBanner } from "@/components/home/cta-banner";
+import type { Metadata } from "next";
 import { getFeaturedProducts, getCategories, getSettings } from "@/lib/queries";
 import { siteConfig } from "@/lib/config";
+import { pageMetadata } from "@/lib/seo";
 
 export const revalidate = 60;
+
+export const metadata: Metadata = pageMetadata({
+  title: `${siteConfig.name} — ${siteConfig.tagline}`,
+  description: siteConfig.description,
+  path: "/",
+  image: "/products/custom-string-face-art.jpg",
+  absoluteTitle: true,
+});
 
 export default async function HomePage() {
   const [featured, categories, settings] = await Promise.all([

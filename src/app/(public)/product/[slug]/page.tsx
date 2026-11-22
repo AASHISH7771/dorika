@@ -6,7 +6,8 @@ import { getProductBySlug, getRelatedProducts, getAllProductSlugs } from "@/lib/
 import { ProductDetailClient } from "@/components/product/product-detail-client";
 import { ProductCard } from "@/components/product-card";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { productImage } from "@/lib/config";
+import { JsonLd } from "@/components/json-ld";
+import { breadcrumbSchema, pageMetadata, productSchema } from "@/lib/seo";
 
 export const revalidate = 30;
 
@@ -17,16 +18,27 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const product = await getProductBySlug(params.slug);
-  if (!product) return { title: "Product not found" };
-  return {
+  if (!product) {
+    return {
+      title: "Product not found",
+      robots: { index: false, follow: true },
+    };
+  }
+
+  // First image that is a real photo — never the blank 1×1 data-URI, which
+  // would render as an empty grey box in a WhatsApp or Facebook preview.
+  const firstRealImage = (product.images ?? []).find(
+    (src) => src && !src.startsWith("data:")
+  );
+
+  return pageMetadata({
     title: product.name,
-    description: product.description ?? undefined,
-    openGraph: {
-      title: product.name,
-      description: product.description ?? undefined,
-      images: [{ url: productImage(product.images, 0) }],
-    },
-  };
+    description:
+      product.description ??
+      `${product.name} — handmade string art from Nepal, delivered across the country.`,
+    path: `/product/${product.slug}`,
+    image: firstRealImage,
+  });
 }
 
 export default async function ProductPage({ params }: { params: { slug: string } }) {
@@ -37,6 +49,19 @@ export default async function ProductPage({ params }: { params: { slug: string }
 
   return (
     <div className="bg-white">
+      {/* Product + Offer, and the breadcrumb trail shown below.
+          No aggregateRating: there are no verified customer reviews yet, and
+          marking up placeholder testimonials as real reviews violates
+          Google's review-snippet policy. */}
+      <JsonLd data={productSchema(product)} />
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Shop", path: "/shop" },
+          { name: product.name, path: `/product/${product.slug}` },
+        ])}
+      />
+
       <div className="container-page py-6">
         {/* Breadcrumb */}
         <nav className="mb-6 flex items-center gap-1.5 text-sm text-charcoal-400" aria-label="Breadcrumb">

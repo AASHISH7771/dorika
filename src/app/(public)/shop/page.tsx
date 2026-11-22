@@ -1,15 +1,20 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { getProducts, getCategories } from "@/lib/queries";
 import { ProductCard } from "@/components/product-card";
 import { ShopFilters } from "@/components/shop/shop-filters";
 import { Pagination } from "@/components/shop/pagination";
 import { PackageSearch } from "lucide-react";
 
-export const metadata: Metadata = {
-  title: "Shop",
+export const metadata: Metadata = pageMetadata({
+  title: "Shop Handmade String Art",
   description: "Browse handmade string art — wall art, custom face art, home decor and gifts. Delivered across Nepal.",
-};
+  // Search/filter/sort variants all canonicalise here, so one clean URL
+  // competes for the query instead of several near-duplicates.
+  path: "/shop",
+  image: "/products/custom-string-face-art.jpg",
+});
 
 export const revalidate = 30;
 

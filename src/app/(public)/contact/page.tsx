@@ -1,16 +1,20 @@
 import type { Metadata } from "next";
+import { localBusinessSchema, pageMetadata } from "@/lib/seo";
+import { JsonLd } from "@/components/json-ld";
 import { Phone, Mail, MapPin, MessageCircle, Clock } from "lucide-react";
 import { ContactForm } from "@/components/contact/contact-form";
 import { siteConfig, whatsappLink } from "@/lib/config";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Contact Us",
   description: "Get in touch with Dorika — call, WhatsApp, email, or visit us in Khairenitar, Tanahun, Nepal.",
-};
+  path: "/contact",
+});
 
 export default function ContactPage() {
   return (
     <div className="bg-cream-100">
+      <JsonLd data={localBusinessSchema()} />
       <div className="border-b border-charcoal-100 bg-white">
         <div className="container-page py-10 text-center">
           <p className="eyebrow mb-2">We&apos;d love to hear from you</p>
