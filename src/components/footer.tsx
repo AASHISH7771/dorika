@@ -1,7 +1,22 @@
 import Link from "next/link";
-import { MapPin, Phone, Mail, Facebook, Instagram, Youtube } from "lucide-react";
+import { MapPin, Phone, Mail, Facebook, Instagram } from "lucide-react";
 import { Logo } from "@/components/logo";
 import { siteConfig, navLinks, whatsappLink } from "@/lib/config";
+
+// lucide-react (0.447.0) ships no TikTok brand icon, so it lives here as a
+// minimal inline SVG matching the same 16px box and stroke-less fill style.
+function TikTokIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      aria-hidden="true"
+      className={className}
+    >
+      <path d="M16.6 5.82A5.61 5.61 0 0 1 15.28 2h-3.2v13.06a2.81 2.81 0 1 1-2.01-2.69V9.1a6.02 6.02 0 1 0 5.21 5.96V8.99a8.79 8.79 0 0 0 5.12 1.64V7.42a5.6 5.6 0 0 1-3.8-1.6Z" />
+    </svg>
+  );
+}
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -25,10 +40,10 @@ export function Footer() {
                className="rounded-full bg-charcoal-700 p-2.5 transition hover:bg-terracotta-500 hover:text-white">
               <Instagram className="h-4 w-4" />
             </a>
-            <a href={siteConfig.social.youtube} target="_blank" rel="noopener noreferrer"
-               aria-label="YouTube"
+            <a href={siteConfig.social.tiktok} target="_blank" rel="noopener noreferrer"
+               aria-label="TikTok"
                className="rounded-full bg-charcoal-700 p-2.5 transition hover:bg-terracotta-500 hover:text-white">
-              <Youtube className="h-4 w-4" />
+              <TikTokIcon className="h-4 w-4" />
             </a>
           </div>
         </div>

@@ -38,10 +38,9 @@ export const siteConfig = {
   },
 
   social: {
-    facebook: "https://facebook.com",
-    instagram: "https://instagram.com",
-    tiktok: "https://tiktok.com",
-    youtube: "https://youtube.com",
+    facebook: "https://www.facebook.com/profile.php?id=61596444311276",
+    instagram: "https://www.instagram.com/shopdorika/",
+    tiktok: "https://www.tiktok.com/@dorika.shop",
   },
 
   currency: {
