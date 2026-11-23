@@ -106,8 +106,9 @@ export function pageMetadata({
 // ── Structured data (schema.org) ─────────────────────────────
 // Emitted as JSON-LD by <JsonLd />. Keep these honest: only publish
 // values that appear on the page. Notably there is NO aggregateRating —
-// the testimonials on the homepage are placeholders, and marking them up
-// as real reviews is a spam-policy violation.
+// the site publishes no customer reviews yet, and inventing them would be a
+// spam-policy violation. Add aggregateRating only when real, verified
+// reviews exist and are visible on the page.
 
 const ORG_ID = `${SITE_URL}/#organization`;
 

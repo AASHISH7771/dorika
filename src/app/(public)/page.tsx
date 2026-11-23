@@ -1,12 +1,10 @@
 import { Hero } from "@/components/home/hero";
 import { FeaturedProducts } from "@/components/home/featured-products";
 import { HowItWorks } from "@/components/home/how-it-works";
-import { Categories } from "@/components/home/categories";
-import { Testimonials } from "@/components/home/testimonials";
 import { WhyDorika } from "@/components/home/why-dorika";
 import { CtaBanner } from "@/components/home/cta-banner";
 import type { Metadata } from "next";
-import { getFeaturedProducts, getCategories, getSettings } from "@/lib/queries";
+import { getFeaturedProducts, getSettings } from "@/lib/queries";
 import { siteConfig } from "@/lib/config";
 import { pageMetadata } from "@/lib/seo";
 
@@ -21,9 +19,10 @@ export const metadata: Metadata = pageMetadata({
 });
 
 export default async function HomePage() {
-  const [featured, categories, settings] = await Promise.all([
+  // Categories are no longer fetched — the "Shop by category" block was
+  // removed, so this saves a Supabase round trip on every revalidation.
+  const [featured, settings] = await Promise.all([
     getFeaturedProducts(8),
-    getCategories(),
     getSettings(),
   ]);
 
@@ -35,8 +34,6 @@ export default async function HomePage() {
       />
       <FeaturedProducts products={featured} />
       <HowItWorks />
-      <Categories categories={categories} />
-      <Testimonials />
       <WhyDorika />
       <CtaBanner />
     </>
