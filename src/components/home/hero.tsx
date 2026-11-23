@@ -33,7 +33,6 @@ export function Hero({ headline, tagline }: { headline: string; tagline: string 
           <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-3 text-sm text-charcoal-500">
             <span className="flex items-center gap-2"><Dot /> 100% handmade</span>
             <span className="flex items-center gap-2"><Dot /> Delivery across Nepal</span>
-            <span className="flex items-center gap-2"><Dot /> No account needed</span>
           </div>
         </div>
 

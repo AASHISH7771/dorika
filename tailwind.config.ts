@@ -48,6 +48,20 @@ const config: Config = {
           800: "#6f301b",
           900: "#5c2a19",
         },
+        // Muted sage. Sits between the terracotta accent and the cream page
+        // canvas, so cards read as their own surface instead of melting into
+        // the background. Earthy rather than cool, to stay in the craft palette.
+        sage: {
+          DEFAULT: "#6E8560",
+          50: "#F1F5ED",
+          100: "#E4EBDD",
+          200: "#CFDBC5",
+          300: "#B3C4A6",
+          400: "#8FA37F",
+          500: "#6E8560",
+          600: "#57694C",
+          700: "#44523B",
+        },
         // Warm paper tones. cream-100 is the page canvas — it used to be
         // #FFFDFB, which read as plain white on screen; these are noticeably
         // creamier while keeping charcoal body text well above AA contrast.

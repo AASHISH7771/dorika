@@ -19,11 +19,11 @@ export function HowItWorks() {
         />
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {steps.map((s, i) => (
-            <div key={s.title} className="relative rounded-2xl border border-charcoal-100 bg-cream-100 p-6 transition hover:shadow-card">
+            <div key={s.title} className="relative rounded-2xl border border-sage-200 bg-sage-100 p-6 transition hover:shadow-card">
               <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-terracotta-500 text-white">
                 <s.icon className="h-6 w-6" />
               </div>
-              <span className="absolute right-5 top-5 text-4xl font-extrabold text-charcoal-100">
+              <span className="absolute right-5 top-5 text-4xl font-extrabold text-sage-300">
                 {i + 1}
               </span>
               <h3 className="text-lg font-bold">{s.title}</h3>
