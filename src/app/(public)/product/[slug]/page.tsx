@@ -35,7 +35,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     title: product.name,
     description:
       product.description ??
-      `${product.name} — handmade string art from Nepal, delivered across the country.`,
+      `${product.name}: handmade string art from Nepal, delivered anywhere in the country.`,
     path: `/product/${product.slug}`,
     image: firstRealImage,
   });

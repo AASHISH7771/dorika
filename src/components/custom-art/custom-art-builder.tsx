@@ -178,7 +178,7 @@ export function CustomArtBuilder({ price, makingTime }: { price: number; makingT
         <div className="mt-6 rounded-xl border border-charcoal-100 p-4 text-left text-sm text-charcoal-500">
           <p className="font-semibold text-charcoal-700">Save your details?</p>
           <p className="mt-1">
-            Creating an account is optional — it just lets you see your order history later.{" "}
+            Creating an account is optional. It just lets you see your order history later.{" "}
             <a href="/account/auth/signup" className="font-semibold text-terracotta-600 hover:underline">
               Create account
             </a>
@@ -223,7 +223,7 @@ export function CustomArtBuilder({ price, makingTime }: { price: number; makingT
           name={HONEYPOT_FIELD} value={hp} onChange={(e) => setHp(e.target.value)}
         />
 
-        {/* STEP 0 — Photo */}
+        {/* STEP 0: Photo */}
         {step === 0 && (
           <div>
             <h2 className="text-xl font-bold">Upload your face photo</h2>
@@ -283,7 +283,7 @@ export function CustomArtBuilder({ price, makingTime }: { price: number; makingT
           </div>
         )}
 
-        {/* STEP 1 — Details */}
+        {/* STEP 1: Details */}
         {step === 1 && (
           <div className="space-y-5">
             <h2 className="text-xl font-bold">Your details</h2>
@@ -366,7 +366,7 @@ export function CustomArtBuilder({ price, makingTime }: { price: number; makingT
           </div>
         )}
 
-        {/* STEP 2 — Review */}
+        {/* STEP 2: Review */}
         {step === 2 && (
           <div>
             <h2 className="text-xl font-bold">Review &amp; submit</h2>
@@ -434,7 +434,7 @@ function Row({ k, v }: { k: string; v: string }) {
   return (
     <div className="flex gap-2">
       <dt className="w-24 flex-shrink-0 text-charcoal-400">{k}</dt>
-      <dd className="font-medium text-charcoal-700">{v || "—"}</dd>
+      <dd className="font-medium text-charcoal-700">{v || "Not provided"}</dd>
     </div>
   );
 }

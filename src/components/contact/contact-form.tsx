@@ -46,7 +46,7 @@ export function ContactForm() {
           <Check className="h-7 w-7 text-green-600" />
         </div>
         <h3 className="mt-4 text-xl font-bold">Message sent!</h3>
-        <p className="mt-1 text-charcoal-500">Thank you — we&apos;ll get back to you soon.</p>
+        <p className="mt-1 text-charcoal-500">Thank you. We&apos;ll get back to you soon.</p>
         <button onClick={() => setStatus("idle")} className="btn-outline btn-md mt-5">
           Send another message
         </button>

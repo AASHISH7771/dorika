@@ -90,7 +90,7 @@ export default async function AccountProfilePage({
               <KeyRound className="h-4 w-4 text-terracotta-500" /> Password
             </p>
             <p className="mt-2 text-sm leading-relaxed text-charcoal-500">
-              Choose a new password any time — you stay signed in on this device.
+              Choose a new password any time. You stay signed in on this device.
             </p>
             <Link href="/account/auth/reset" className="btn-outline btn-sm mt-4 w-full">
               Change password

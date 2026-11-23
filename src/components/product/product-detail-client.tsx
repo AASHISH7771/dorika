@@ -123,7 +123,7 @@ export function ProductDetailClient({ product }: { product: Product }) {
               This is a custom, made-to-order piece.
             </p>
             <p className="mt-1 text-sm text-charcoal-500">
-              Head to the Custom Art builder to upload your photo and place the order — no account needed.
+              Head to the Custom Art builder to upload your photo and place the order. No account needed.
             </p>
             <a href="/custom-art" className="btn-primary btn-lg mt-4">
               Start your custom art <Zap className="h-4 w-4" />

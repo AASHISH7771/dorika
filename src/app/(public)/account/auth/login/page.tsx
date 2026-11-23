@@ -18,9 +18,9 @@ export const metadata: Metadata = {
 const ERRORS: Record<string, string> = {
   missing: "Please enter your email and password.",
   invalid: "That email and password don't match. Try again.",
-  unconfirmed: "That account exists but its email isn't confirmed yet — open the link in your inbox, then sign in.",
+  unconfirmed: "That account exists but its email isn't confirmed yet. Open the link in your inbox, then sign in.",
   failed: "Sign-in failed for an unexpected reason. Please try again.",
-  not_configured: "Accounts aren't switched on yet — see the note below.",
+  not_configured: "Accounts aren't switched on yet. See the note below.",
   link_expired: "That link has expired or was already used. Request a fresh one.",
 };
 

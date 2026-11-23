@@ -74,7 +74,7 @@ export default async function AccountOrdersPage({
           title={all.length === 0 ? "No orders yet" : "Nothing in this status"}
           hint={
             all.length === 0
-              ? "Once you place an order — as a guest with this phone or email — it lands here."
+              ? "Once you place an order, as a guest with this phone or email, it lands here."
               : "Try a different filter to see your other orders."
           }
           actionLabel={all.length === 0 ? "Browse the shop" : undefined}

@@ -89,7 +89,7 @@ export default function CartPage() {
                 Continue shopping
               </Link>
               <p className="mt-4 text-center text-xs text-charcoal-400">
-                No account needed — checkout as a guest.
+                No account needed. Checkout as a guest.
               </p>
             </aside>
           </div>

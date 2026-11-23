@@ -29,7 +29,7 @@ export default function FaqPage() {
           Still have questions?{" "}
           <Link href="/contact" className="font-semibold text-terracotta-600 hover:underline">
             Get in touch
-          </Link>{" "}— we&apos;re happy to help.
+          </Link>{" "}and we&apos;re happy to help.
         </p>
       </div>
     </div>

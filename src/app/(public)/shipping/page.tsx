@@ -21,13 +21,13 @@ export default function ShippingPage() {
       <LegalSection heading="Delivery charges">
         <p>
           A standard delivery fee is calculated at checkout based on your location. Orders above a
-          set value qualify for free delivery — you&apos;ll see this automatically in your cart.
+          set value qualify for free delivery, and you&apos;ll see this automatically in your cart.
         </p>
       </LegalSection>
       <LegalSection heading="Making & dispatch time">
         <ul className="list-disc space-y-1 pl-5">
-          <li><strong>Ready-made pieces:</strong> dispatched within 1–3 days.</li>
-          <li><strong>Custom String Face Art:</strong> crafted in 7–10 days, then dispatched.</li>
+          <li><strong>Ready-made pieces:</strong> dispatched within 1-3 days.</li>
+          <li><strong>Custom String Face Art:</strong> crafted in 7-10 days, then dispatched.</li>
         </ul>
         <p>You can track your order anytime from the Track Order page using your Order ID and phone number.</p>
       </LegalSection>
@@ -44,7 +44,7 @@ export default function ShippingPage() {
       </LegalSection>
       <LegalSection heading="Need help?">
         <p>
-          Message us on WhatsApp at +977 9708285877 — we&apos;re happy to help with any delivery or
+          Message us on WhatsApp at +977 9708285877. We&apos;re happy to help with any delivery or
           return question.
         </p>
       </LegalSection>

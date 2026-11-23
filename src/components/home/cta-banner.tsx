@@ -14,7 +14,7 @@ export function CtaBanner() {
               Turn your favourite photo into string art
             </h2>
             <p className="mt-4 text-lg text-charcoal-200">
-              Upload a face photo and we&apos;ll hand-craft it on a 45cm plank — no account needed.
+              Upload a face photo and we&apos;ll hand-craft it on a 45cm plank. No account needed.
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
               <Link href="/custom-art" className="btn-primary btn-lg">

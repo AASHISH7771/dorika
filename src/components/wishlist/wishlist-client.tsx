@@ -50,7 +50,7 @@ export function WishlistClient() {
         <SectionHeading
           eyebrow="Saved for later"
           title="Your Wishlist"
-          subtitle="Everything you've hearted — saved right here on this device, no account needed."
+          subtitle="Everything you've saved, kept right here on this device. No account needed."
         />
 
         {loading ? (

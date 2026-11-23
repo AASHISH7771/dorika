@@ -123,7 +123,7 @@ export default async function InvoicePage({ params }: { params: { id: string } }
           </div>
 
           <p className="mt-10 text-center text-xs text-charcoal-400">
-            Thank you for supporting handmade. — {store.name}
+            Thank you for supporting handmade. {store.name}
           </p>
         </div>
       </div>

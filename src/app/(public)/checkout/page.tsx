@@ -4,7 +4,7 @@ import { getSettings } from "@/lib/queries";
 
 export const metadata: Metadata = {
   title: "Checkout",
-  description: "Guest checkout — no account required.",
+  description: "Guest checkout. No account required.",
   robots: { index: false, follow: false },
 };
 

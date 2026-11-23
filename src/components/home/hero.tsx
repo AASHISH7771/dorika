@@ -16,7 +16,7 @@ export function Hero({ headline, tagline }: { headline: string; tagline: string 
       <div className="container-page relative grid items-center gap-10 py-16 lg:grid-cols-2 lg:py-24">
         <div className="animate-fade-up">
           <span className="eyebrow inline-flex items-center gap-2">
-            <Sparkles className="h-4 w-4" /> Handmade in Nepal
+            <Sparkles className="h-4 w-4" /> From Khairenitar, Tanahun
           </span>
           <h1 className="mt-4 text-4xl font-extrabold leading-tight sm:text-5xl lg:text-6xl">
             {headline}
@@ -50,7 +50,7 @@ export function Hero({ headline, tagline }: { headline: string; tagline: string 
           </div>
           <div className="absolute -bottom-5 -left-5 hidden rounded-2xl bg-white p-4 shadow-card sm:block">
             <p className="text-sm font-bold text-charcoal-800">45cm Signature Plank</p>
-            <p className="text-xs text-charcoal-400">Your photo, woven in thread</p>
+            <p className="text-xs text-charcoal-400">Made from your photo</p>
           </div>
         </div>
       </div>

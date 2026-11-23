@@ -4,7 +4,7 @@ import { TrackClient } from "@/components/track/track-client";
 
 export const metadata: Metadata = pageMetadata({
   title: "Track Your Order",
-  description: "Enter your Order ID and phone number to see your order status — no account needed.",
+  description: "Enter your Order ID and phone number to see your order status. No account needed.",
   path: "/track",
 });
 
@@ -16,7 +16,7 @@ export default function TrackPage() {
           <p className="eyebrow mb-2">Order status</p>
           <h1 className="text-4xl font-extrabold">Track Your Order</h1>
           <p className="mx-auto mt-2 max-w-lg text-charcoal-400">
-            No account needed — just enter your Order ID and the phone number you used.
+            No account needed. Just enter your Order ID and the phone number you used.
           </p>
         </div>
       </div>

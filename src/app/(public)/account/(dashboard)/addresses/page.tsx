@@ -164,7 +164,7 @@ export default async function AccountAddressesPage({
 
       {addresses.length === 0 ? (
         <p className="text-sm text-charcoal-400">
-          No addresses saved yet — add one above and it will appear at checkout.
+          No addresses saved yet. Add one above and it will appear at checkout.
         </p>
       ) : (
         <div className="grid gap-3 sm:grid-cols-2">

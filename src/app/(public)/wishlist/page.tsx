@@ -4,7 +4,7 @@ import { WishlistClient } from "@/components/wishlist/wishlist-client";
 
 export const metadata: Metadata = pageMetadata({
   title: "Your Wishlist",
-  description: "Your saved Dorika pieces — stored on this device, no account required.",
+  description: "Your saved Dorika pieces, stored on this device. No account required.",
   path: "/wishlist",
   // Per-visitor content held in localStorage — nothing to index.
   noindex: true,

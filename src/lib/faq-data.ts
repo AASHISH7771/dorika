@@ -18,7 +18,7 @@ export const faqs: Faq[] = [
   },
   {
     q: "How does String Face Art work?",
-    a: "You upload a clear face photo, we design a thread pattern from it, hand-craft it onto a 45cm round wooden plank, and deliver it to your door. The whole process takes about 7–10 days.",
+    a: "You upload a clear face photo, we design a thread pattern from it, hand-craft it onto a 45cm round wooden plank, and deliver it to your door. The whole process takes about 7-10 days.",
   },
   {
     q: "What photo works best?",
@@ -34,7 +34,7 @@ export const faqs: Faq[] = [
   },
   {
     q: "Do you deliver outside the Kathmandu Valley?",
-    a: "Yes — we deliver to every district in Nepal through courier partners. Delivery time and fee depend on your location.",
+    a: "Yes. We deliver to every district in Nepal through courier partners. Delivery time and fee depend on your location.",
   },
   {
     q: "How do I track my order?",

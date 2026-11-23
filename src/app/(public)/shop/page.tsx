@@ -9,7 +9,7 @@ import { PackageSearch } from "lucide-react";
 
 export const metadata: Metadata = pageMetadata({
   title: "Shop Handmade String Art",
-  description: "Browse handmade string art — wall art, custom face art, home decor and gifts. Delivered across Nepal.",
+  description: "Browse handmade string art: wall art, custom face art, home decor and gifts. Delivered across Nepal.",
   // Search/filter/sort variants all canonicalise here, so one clean URL
   // competes for the query instead of several near-duplicates.
   path: "/shop",

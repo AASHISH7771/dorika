@@ -27,7 +27,7 @@ export function AuthShell({
           </div>
           {below && <div className="mt-5">{below}</div>}
           <p className="mt-6 text-center text-xs text-charcoal-400">
-            An account is always optional —{" "}
+            An account is always optional.{" "}
             <Link href="/shop" className="font-semibold text-terracotta-600 hover:underline">
               keep shopping as a guest
             </Link>{" "}

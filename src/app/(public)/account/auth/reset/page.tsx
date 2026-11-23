@@ -24,7 +24,7 @@ const ERRORS: Record<string, string> = {
   mismatch: "The two passwords don't match.",
   expired: "Your reset link has expired. Request a new one.",
   failed: "We couldn't update the password. Try again.",
-  not_configured: "Accounts aren't switched on yet — see the note below.",
+  not_configured: "Accounts aren't switched on yet. See the note below.",
 };
 
 export default async function ResetPasswordPage({

@@ -45,7 +45,7 @@ export default async function AccountOverviewPage({
     <>
       <PanelHeader
         title={`Namaste, ${firstName}`}
-        subtitle="Your orders, custom art and saved details — all in one place."
+        subtitle="Your orders, custom art and saved details, all in one place."
         action={
           <Link href="/shop" className="btn-outline btn-sm">
             <ShoppingBag className="h-4 w-4" /> Shop
@@ -54,7 +54,7 @@ export default async function AccountOverviewPage({
       />
 
       {searchParams.welcome === "1" && (
-        <Notice kind="success">Welcome to Dorika — your account is ready.</Notice>
+        <Notice kind="success">Welcome to Dorika. Your account is ready.</Notice>
       )}
       {searchParams.ok === "claimed" && (
         <Notice kind="success">
@@ -62,7 +62,7 @@ export default async function AccountOverviewPage({
         </Notice>
       )}
       {searchParams.ok === "password" && (
-        <Notice kind="success">Password updated — you&apos;re signed in.</Notice>
+        <Notice kind="success">Password updated. You&apos;re signed in.</Notice>
       )}
       {searchParams.error === "claim_failed" && (
         <Notice kind="error">
@@ -119,7 +119,7 @@ export default async function AccountOverviewPage({
         {recent.length === 0 ? (
           <EmptyPanel
             title="No orders yet"
-            hint="Your orders will appear here automatically — whether you ordered as a guest or while signed in."
+            hint="Your orders will appear here automatically, whether you ordered as a guest or while signed in."
             actionLabel="Browse the shop"
             actionHref="/shop"
           />

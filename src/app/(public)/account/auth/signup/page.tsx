@@ -21,7 +21,7 @@ const ERRORS: Record<string, string> = {
   mismatch: "The two passwords don't match.",
   exists: "An account with that email already exists. Try signing in instead.",
   failed: "We couldn't create the account. Please try again.",
-  not_configured: "Accounts aren't switched on yet — see the note below.",
+  not_configured: "Accounts aren't switched on yet. See the note below.",
 };
 
 export default function SignUpPage({

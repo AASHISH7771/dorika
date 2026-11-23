@@ -159,7 +159,7 @@ export async function POST(req: NextRequest) {
   if (body.email) {
     await sendEmail({
       to: body.email,
-      subject: `Dorika — Order ${order_no} received`,
+      subject: `Dorika: order ${order_no} received`,
       html: orderConfirmationHtml({
         orderNo: order_no,
         name: body.customer_name,

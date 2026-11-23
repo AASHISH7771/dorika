@@ -88,7 +88,7 @@ export default async function OrderConfirmationPage({
             <UserPlus className="mt-0.5 h-5 w-5 flex-shrink-0 text-terracotta-500" />
             <p className="text-sm text-charcoal-500">
               <span className="font-semibold text-charcoal-700">Want to save your details?</span>{" "}
-              Creating an account is optional — it lets you see your order history and
+              Creating an account is optional. It lets you see your order history and
               reuse your address next time.{" "}
               <Link href="/account/auth/signup" className="font-semibold text-terracotta-600 hover:underline">
                 Create account

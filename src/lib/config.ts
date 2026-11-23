@@ -21,9 +21,9 @@ function resolveSiteUrl(): string {
 
 export const siteConfig = {
   name: "Dorika",
-  tagline: "Handmade string art from the heart of Nepal",
+  tagline: "String art, handmade in Nepal",
   description:
-    "Dorika crafts handmade string art in Nepal — including custom String Face Art woven from your photo on a 45cm plank. Delivered across Nepal.",
+    "Dorika makes string art by hand in Khairenitar, Nepal. Send a photo and we turn it into a custom portrait on a 45cm plank, delivered anywhere in Nepal.",
   url: resolveSiteUrl(),
 
   contact: {
@@ -52,7 +52,7 @@ export const siteConfig = {
   customArt: {
     plankSize: "45cm diameter round plank",
     price: 3500,
-    makingTime: "7–10 days",
+    makingTime: "7-10 days",
   },
 
   // Google Maps embed for Khairenitar, Tanahun

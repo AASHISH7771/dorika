@@ -60,7 +60,7 @@ export function Logo({
 
   if (!withLink) return svg;
   return (
-    <Link href="/" aria-label="Dorika — home" className="inline-flex items-center">
+    <Link href="/" aria-label="Dorika home" className="inline-flex items-center">
       {svg}
     </Link>
   );

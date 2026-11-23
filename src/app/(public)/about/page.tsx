@@ -8,7 +8,7 @@ import { placeholderConfig, siteConfig } from "@/lib/config";
 
 export const metadata: Metadata = pageMetadata({
   title: "About Us",
-  description: "The story behind Dorika — a family string-art craft from Khairenitar, Tanahun, Nepal.",
+  description: "The story of Dorika, a family string-art workshop in Khairenitar, Tanahun, Nepal.",
   path: "/about",
 });
 
@@ -35,12 +35,12 @@ export default function AboutPage() {
           <div>
             <p className="eyebrow mb-2">Our story</p>
             <h1 className="text-4xl font-extrabold sm:text-5xl">
-              Woven in Nepal,<br />made to be treasured
+              Made by hand,<br />in Tanahun, Nepal
             </h1>
             <p className="mt-5 text-charcoal-500">
               Dorika began in {siteConfig.contact.address} with a simple idea: that a length of
               thread and a handful of nails could hold a memory. What started as a hobby grew
-              into a small family workshop making handmade string art — and our signature
+              into a small family workshop making handmade string art, plus our signature
               String Face Art, woven from your own photos.
             </p>
             <div className="mt-7 flex gap-3">
@@ -58,7 +58,7 @@ export default function AboutPage() {
       <section className="section">
         <div className="container-page grid gap-6 md:grid-cols-3">
           <MissionCard icon={Target} title="Our mission" text="To turn everyday photos and spaces into handcrafted keepsakes that last a lifetime." />
-          <MissionCard icon={Sparkles} title="Our craft" text="Precision patterns, careful nailing, and patient weaving — the art is in the detail." />
+          <MissionCard icon={Sparkles} title="Our craft" text="Precision patterns, careful nailing, and patient weaving. The art is in the detail." />
           <MissionCard icon={Heart} title="Our promise" text="Genuine handmade quality, honest pricing, and delivery to your door across Nepal." />
         </div>
       </section>
@@ -87,10 +87,10 @@ export default function AboutPage() {
           </div>
           <div>
             <p className="eyebrow mb-2 !text-terracotta-400">Meet the maker</p>
-            <h2 className="text-3xl font-extrabold text-white">Crafted by hand, with heart</h2>
+            <h2 className="text-3xl font-extrabold text-white">One maker, one piece at a time</h2>
             <p className="mt-4 text-charcoal-200">
               Behind every Dorika piece is a maker who cares about getting the little things
-              right — the tension of the thread, the finish of the plank, the likeness in a
+              right: the tension of the thread, the finish of the plank, the likeness in a
               portrait. We&apos;re a small team, and that&apos;s exactly why each order gets
               our full attention.
             </p>

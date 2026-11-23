@@ -70,7 +70,7 @@ export default async function AccountCustomRequestsPage() {
                 )}
                 <span className="inline-flex items-center gap-1">
                   <ImageIcon className="h-3.5 w-3.5 text-terracotta-400" />
-                  Photo received — visible to the studio only
+                  Photo received. Visible to the studio only
                 </span>
               </div>
 

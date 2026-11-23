@@ -27,7 +27,7 @@ export function Footer() {
         <div className="sm:col-span-2 lg:col-span-1">
           <Logo variant="light" className="h-8" />
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-charcoal-300">
-            {siteConfig.tagline}. Every piece hand-woven with care in Khairenitar, Tanahun.
+            {siteConfig.tagline}. Every piece is hand-woven in Khairenitar, Tanahun.
           </p>
           <div className="mt-5 flex gap-3">
             <a href={siteConfig.social.facebook} target="_blank" rel="noopener noreferrer"
@@ -104,7 +104,7 @@ export function Footer() {
 
       <div className="border-t border-charcoal-700">
         <div className="container-page flex flex-col items-center justify-between gap-2 py-5 text-xs text-charcoal-400 sm:flex-row">
-          <p>© {year} Dorika. Handmade in Nepal with love.</p>
+          <p>© {year} Dorika. All rights reserved.</p>
           <p>Prices in {siteConfig.currency.code} ({siteConfig.currency.symbol})</p>
         </div>
       </div>

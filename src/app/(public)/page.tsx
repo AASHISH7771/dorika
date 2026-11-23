@@ -11,7 +11,7 @@ import { pageMetadata } from "@/lib/seo";
 export const revalidate = 60;
 
 export const metadata: Metadata = pageMetadata({
-  title: `${siteConfig.name} — ${siteConfig.tagline}`,
+  title: `${siteConfig.name} · ${siteConfig.tagline}`,
   description: siteConfig.description,
   path: "/",
   image: "/products/custom-string-face-art.jpg",

@@ -102,7 +102,7 @@ export function CheckoutClient({ settings }: { settings: Settings | null }) {
         {/* Delivery details */}
         <section className="rounded-2xl border border-charcoal-100 bg-white p-6">
           <h2 className="text-lg font-bold">Delivery details</h2>
-          <p className="mt-1 text-sm text-charcoal-400">No account needed — just tell us where to deliver.</p>
+          <p className="mt-1 text-sm text-charcoal-400">No account needed. Just tell us where to deliver.</p>
           <div className="mt-5 grid gap-4 sm:grid-cols-2">
             <Field label="Full name" required>
               <Input value={form.customer_name} onChange={(e) => set("customer_name", e.target.value)} placeholder="Your name" />
@@ -110,7 +110,7 @@ export function CheckoutClient({ settings }: { settings: Settings | null }) {
             <Field label="Phone" required hint="We'll call to confirm">
               <Input value={form.phone} onChange={(e) => set("phone", e.target.value)} placeholder="98XXXXXXXX" inputMode="tel" />
             </Field>
-            <Field label="Email" hint="Optional — for confirmation" className="sm:col-span-2">
+            <Field label="Email" hint="Optional, for confirmation" className="sm:col-span-2">
               <Input type="email" value={form.email} onChange={(e) => set("email", e.target.value)} placeholder="you@example.com" />
             </Field>
             <Field label="District" required>
@@ -166,7 +166,7 @@ export function CheckoutClient({ settings }: { settings: Settings | null }) {
                 <p className="mt-1 text-charcoal-500">
                   Send <strong>{formatNPR(total)}</strong> to eSewa{" "}
                   <span className="font-mono font-semibold text-charcoal-800">
-                    {settings?.esewa_id || "— add your eSewa number in admin settings —"}
+                    {settings?.esewa_id || "Not set up yet"}
                   </span>
                 </p>
               )}
@@ -174,7 +174,7 @@ export function CheckoutClient({ settings }: { settings: Settings | null }) {
                 <p className="mt-1 text-charcoal-500">
                   Send <strong>{formatNPR(total)}</strong> to Khalti{" "}
                   <span className="font-mono font-semibold text-charcoal-800">
-                    {settings?.khalti_id || "— add your Khalti number in admin settings —"}
+                    {settings?.khalti_id || "Not set up yet"}
                   </span>
                 </p>
               )}
@@ -184,7 +184,7 @@ export function CheckoutClient({ settings }: { settings: Settings | null }) {
                     Transfer <strong>{formatNPR(total)}</strong> to:
                   </p>
                   <p className="font-mono font-semibold text-charcoal-800">
-                    {settings?.bank_name || "—"}
+                    {settings?.bank_name || "Not set up yet"}
                     {settings?.bank_account_number
                       ? ` · ${settings.bank_account_number}`
                       : " · add account in admin settings"}

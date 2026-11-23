@@ -7,7 +7,7 @@ import { siteConfig, whatsappLink } from "@/lib/config";
 
 export const metadata: Metadata = pageMetadata({
   title: "Contact Us",
-  description: "Get in touch with Dorika — call, WhatsApp, email, or visit us in Khairenitar, Tanahun, Nepal.",
+  description: "Get in touch with Dorika. Call, WhatsApp, email, or visit us in Khairenitar, Tanahun, Nepal.",
   path: "/contact",
 });
 
@@ -53,7 +53,7 @@ export default function ContactPage() {
         {/* Map */}
         <div className="mt-10 overflow-hidden rounded-2xl border border-charcoal-100 shadow-soft">
           <iframe
-            title="Dorika location — Khairenitar, Tanahun"
+            title="Dorika location: Khairenitar, Tanahun"
             src={siteConfig.mapEmbed}
             width="100%"
             height="400"
