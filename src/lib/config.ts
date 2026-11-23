@@ -34,7 +34,7 @@ export const siteConfig = {
     whatsappPrefill:
       "Hi Dorika, I want to know more about your string art.",
     email: "shopdorika@gmail.com",
-    address: "Khairenitar, Tanahun, Nepal",
+    address: "Pokhara, Nepal",
   },
 
   social: {

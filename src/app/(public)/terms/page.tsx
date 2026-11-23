@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { pageMetadata } from "@/lib/seo";
 import { LegalLayout, LegalSection } from "@/components/legal-layout";
+import { pageMetadata } from "@/lib/seo";
 import { siteConfig } from "@/lib/config";
 
 export const metadata: Metadata = pageMetadata({
@@ -12,7 +12,7 @@ export const metadata: Metadata = pageMetadata({
 export default function TermsPage() {
   return (
     <LegalLayout title="Terms of Service" updated="November 2026">
-      <p className="text-charcoal-500">
+      <p>
         By using this website and placing an order, you agree to the following terms.
       </p>
       <LegalSection heading="Orders">
@@ -25,13 +25,13 @@ export default function TermsPage() {
       <LegalSection heading="Custom String Face Art">
         <p>
           Custom pieces are made to order from the photo you provide. Because each piece is
-          personalised and handmade, slight variations from the reference photo are normal and
+          personalised and crafted, slight variations from the reference photo are normal and
           part of the craft. By submitting a photo, you confirm you have the right to use it.
         </p>
       </LegalSection>
       <LegalSection heading="Payment">
         <p>
-          We accept Cash on Delivery, and (where enabled) eSewa, Khalti and bank transfer. Custom
+          We accept <mark className="hl-blush">Cash on Delivery</mark>, and (where enabled) eSewa, Khalti and bank transfer. Custom
           orders may require advance confirmation before we begin crafting.
         </p>
       </LegalSection>
@@ -44,13 +44,13 @@ export default function TermsPage() {
       <LegalSection heading="Intellectual property">
         <p>
           All site content, designs and the Dorika name and logo belong to Dorika and may not be
-          used without permission.
+          used without <mark className="hl-blush">permission</mark>.
         </p>
       </LegalSection>
       <LegalSection heading="Contact">
         <p>
           Questions? Reach us at{" "}
-          <a className="font-semibold text-terracotta-600" href={`mailto:${siteConfig.contact.email}`}>
+          <a className="font-medium text-clay underline decoration-clay/30 underline-offset-2 hover:decoration-clay" href={`mailto:${siteConfig.contact.email}`}>
             {siteConfig.contact.email}
           </a>.
         </p>

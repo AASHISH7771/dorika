@@ -1,30 +1,70 @@
 "use client";
 
-import { useState } from "react";
-import { ChevronDown } from "lucide-react";
+import { useId, useState } from "react";
+import { Plus } from "lucide-react";
 import { cn } from "@/lib/utils";
-// Shared with the FAQPage structured data on /faq — single source of truth.
-import { faqs } from "@/lib/faq-data";
+import { faqItems, type FaqItem } from "@/lib/faq";
 
-export function FaqAccordion() {
-  const [open, setOpen] = useState<number | null>(0);
+export function FaqAccordion({
+  items = faqItems,
+  defaultOpen = 0,
+}: {
+  items?: FaqItem[];
+  defaultOpen?: number | null;
+}) {
+  const [open, setOpen] = useState<number | null>(defaultOpen);
+  const baseId = useId();
+
   return (
-    <div className="mx-auto max-w-3xl space-y-3">
-      {faqs.map((f, i) => {
+    <div className="border-t border-line">
+      {items.map((item, i) => {
         const isOpen = open === i;
+        const panelId = `${baseId}-panel-${i}`;
+        const buttonId = `${baseId}-button-${i}`;
         return (
-          <div key={i} className="overflow-hidden rounded-2xl border border-charcoal-100 bg-white">
-            <button
-              onClick={() => setOpen(isOpen ? null : i)}
-              className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left font-semibold text-charcoal-800"
-              aria-expanded={isOpen}
+          <div key={item.q} className="border-b border-line">
+            <h3>
+              <button
+                id={buttonId}
+                type="button"
+                onClick={() => setOpen(isOpen ? null : i)}
+                aria-expanded={isOpen}
+                aria-controls={panelId}
+                className="group flex w-full items-start justify-between gap-6 py-5 text-left"
+              >
+                <span
+                  className={cn(
+                    "font-display text-[1.05rem] leading-snug tracking-tight transition-colors sm:text-[1.15rem]",
+                    isOpen ? "text-clay" : "text-ink group-hover:text-clay"
+                  )}
+                >
+                  {item.q}
+                </span>
+                <span
+                  className={cn(
+                    "mt-1 flex h-6 w-6 flex-shrink-0 items-center justify-center border transition-all duration-300",
+                    isOpen ? "rotate-45 border-clay text-clay" : "border-line-strong text-ink-muted group-hover:border-ink"
+                  )}
+                  aria-hidden="true"
+                >
+                  <Plus className="h-3.5 w-3.5" strokeWidth={1.5} />
+                </span>
+              </button>
+            </h3>
+            <div
+              id={panelId}
+              role="region"
+              aria-labelledby={buttonId}
+              aria-hidden={!isOpen}
+              className={cn(
+                "grid transition-[grid-template-rows] duration-300 ease-out",
+                isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+              )}
             >
-              {f.q}
-              <ChevronDown className={cn("h-5 w-5 flex-shrink-0 text-terracotta-500 transition-transform", isOpen && "rotate-180")} />
-            </button>
-            <div className={cn("grid transition-all duration-300", isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]")}>
               <div className="overflow-hidden">
-                <p className="px-5 pb-5 text-charcoal-500">{f.a}</p>
+                <p className="max-w-[62ch] pb-6 pr-10 text-[0.9375rem] leading-relaxed text-ink-soft">
+                  {item.a}
+                </p>
               </div>
             </div>
           </div>

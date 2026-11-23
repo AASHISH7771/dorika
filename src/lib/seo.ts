@@ -16,7 +16,7 @@
 import type { Metadata } from "next";
 import { siteConfig, hasRealImage } from "@/lib/config";
 import type { Product } from "@/lib/types";
-import { faqs } from "@/lib/faq-data";
+import { faqItems } from "@/lib/faq";
 
 export const SITE_URL = siteConfig.url;
 
@@ -233,7 +233,7 @@ export function faqSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: faqs.map((f) => ({
+    mainEntity: faqItems.map((f) => ({
       "@type": "Question",
       name: f.q,
       acceptedAnswer: { "@type": "Answer", text: f.a },

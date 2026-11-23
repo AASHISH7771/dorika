@@ -1,21 +1,27 @@
 import type { Metadata, Viewport } from "next";
-import { Nunito, Quicksand } from "next/font/google";
+import { Fraunces, Inter, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/components/providers";
 import { JsonLd } from "@/components/json-ld";
 import { siteConfig } from "@/lib/config";
 import { absoluteUrl, DEFAULT_OG_IMAGE, organizationSchema, websiteSchema } from "@/lib/seo";
 
-const nunito = Nunito({
+const display = Fraunces({
   subsets: ["latin"],
-  variable: "--font-nunito",
+  variable: "--font-display",
+  display: "swap",
+  axes: ["SOFT", "WONK", "opsz"],
+});
+const sans = Inter({
+  subsets: ["latin"],
+  variable: "--font-sans",
   display: "swap",
 });
-const quicksand = Quicksand({
+const mono = IBM_Plex_Mono({
   subsets: ["latin"],
-  variable: "--font-quicksand",
+  variable: "--font-mono",
   display: "swap",
-  weight: ["500", "600", "700"],
+  weight: ["400", "500"],
 });
 
 export const metadata: Metadata = {
@@ -65,7 +71,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${nunito.variable} ${quicksand.variable}`}>
+    <html lang="en" className={`${display.variable} ${sans.variable} ${mono.variable}`}>
       <body>
         {/* Brand + site entities, read by Google on every page. */}
         <JsonLd data={organizationSchema()} />
