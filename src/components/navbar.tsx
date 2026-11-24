@@ -5,7 +5,8 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Menu, X, ShoppingBag, Heart, Search, ArrowUpRight } from "lucide-react";
 import { Logo } from "@/components/logo";
-import { siteConfig, whatsappLink } from "@/lib/config";
+import { useStore } from "@/components/store-context";
+import { waHref } from "@/lib/store-types";
 import { useCart } from "@/lib/cart-context";
 import { useWishlist } from "@/lib/wishlist-context";
 import { cn } from "@/lib/utils";
@@ -21,6 +22,7 @@ const PRIMARY_NAV = [
 
 export function Navbar({ categories = [] }: { categories?: Category[] }) {
   const pathname = usePathname();
+  const store = useStore();
   const { count, setOpen } = useCart();
   const { count: wishCount } = useWishlist();
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -78,7 +80,7 @@ export function Navbar({ categories = [] }: { categories?: Category[] }) {
               </Link>
             </div>
             <a
-              href={whatsappLink()}
+              href={waHref(store)}
               target="_blank"
               rel="noopener noreferrer"
               className="group inline-flex items-center gap-1 font-mono text-[0.6875rem] uppercase tracking-[0.14em] text-ink sm:hidden"
@@ -269,16 +271,16 @@ export function Navbar({ categories = [] }: { categories?: Category[] }) {
             <div className="mt-10 space-y-2">
               <p className="eyebrow">The workshop</p>
               <p className="text-sm leading-relaxed text-ink-soft">
-                {siteConfig.contact.address}
+                {store.address}
               </p>
-              <a href={`tel:+${siteConfig.contact.whatsapp}`} className="block text-sm text-ink">
-                {siteConfig.contact.phoneDisplay}
+              <a href={`tel:+${store.phoneDial}`} className="block text-sm text-ink">
+                {store.phoneDisplay}
               </a>
               <a
-                href={`mailto:${siteConfig.contact.email}`}
+                href={`mailto:${store.email}`}
                 className="block text-sm text-ink-soft hover:text-ink"
               >
-                {siteConfig.contact.email}
+                {store.email}
               </a>
             </div>
           </div>
@@ -286,7 +288,7 @@ export function Navbar({ categories = [] }: { categories?: Category[] }) {
           <div className="flex-shrink-0 border-t border-line px-5 py-4">
             <div className="flex items-center justify-end">
               <a
-                href={whatsappLink()}
+                href={waHref(store)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group inline-flex items-center gap-1.5 text-sm text-ink-soft hover:text-ink"

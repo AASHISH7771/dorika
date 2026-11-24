@@ -73,9 +73,8 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${display.variable} ${sans.variable} ${mono.variable}`}>
       <body>
-        {/* Brand + site entities, read by Google on every page. */}
-        <JsonLd data={organizationSchema()} />
-        <JsonLd data={websiteSchema()} />
+        {/* Structured data lives in the (public) layout, where the resolved
+            store identity is already available. */}
         <Providers>{children}</Providers>
       </body>
     </html>

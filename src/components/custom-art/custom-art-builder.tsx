@@ -11,6 +11,8 @@ import { Turnstile } from "@/components/turnstile";
 import { HONEYPOT_FIELD } from "@/lib/security";
 import { formatNPR, cn, isValidNepaliPhone } from "@/lib/utils";
 import { siteConfig } from "@/lib/config";
+import { useStore } from "@/components/store-context";
+import { waHref } from "@/lib/store-types";
 
 const DRAFT_KEY = "dorika_custom_draft_v1";
 const STEPS = ["Photo", "Details", "Review", "Done"] as const;
@@ -30,6 +32,7 @@ const emptyForm: FormState = {
 };
 
 export function CustomArtBuilder({ price, makingTime }: { price: number; makingTime: string }) {
+  const store = useStore();
   const [step, setStep] = useState(0);
   const [form, setForm] = useState<FormState>(emptyForm);
   const [photoFile, setPhotoFile] = useState<File | null>(null);
@@ -165,7 +168,7 @@ export function CustomArtBuilder({ price, makingTime }: { price: number; makingT
         </div>
         <div className="mt-6 flex flex-col gap-3 sm:flex-row">
           <a
-            href={`https://wa.me/${siteConfig.contact.whatsapp}?text=${encodeURIComponent(waMsg)}`}
+            href={waHref(store, waMsg)}
             target="_blank" rel="noopener noreferrer"
             className="btn-primary btn-lg flex-1 !bg-whatsapp hover:!brightness-110"
           >

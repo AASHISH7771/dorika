@@ -1,8 +1,10 @@
 import Link from "next/link";
 import { ArrowRight, Phone, Mail, MapPin } from "lucide-react";
-import { siteConfig, whatsappLink } from "@/lib/config";
+import { getStoreInfo } from "@/lib/store-info";
+import { waHref } from "@/lib/store-types";
 
-export function CtaBanner() {
+export async function CtaBanner() {
+  const store = await getStoreInfo();
   return (
     <section className="section bg-white">
       <div className="container-page">
@@ -20,7 +22,7 @@ export function CtaBanner() {
               <Link href="/custom-art" className="btn-primary btn-lg">
                 Create Your Custom Art <ArrowRight className="h-4 w-4" />
               </Link>
-              <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" className="btn-outline btn-lg !border-white/30 !bg-transparent !text-white hover:!border-white">
+              <a href={waHref(store)} target="_blank" rel="noopener noreferrer" className="btn-outline btn-lg !border-white/30 !bg-transparent !text-white hover:!border-white">
                 Ask on WhatsApp
               </a>
             </div>
@@ -29,22 +31,22 @@ export function CtaBanner() {
 
         {/* Contact strip */}
         <div className="mt-6 grid gap-4 rounded-2xl border border-charcoal-100 bg-cream-100 p-6 sm:grid-cols-3">
-          <a href={`tel:+${siteConfig.contact.whatsapp}`} className="flex items-center gap-3">
+          <a href={`tel:+${store.phoneDial}`} className="flex items-center gap-3">
             <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-terracotta-50 text-terracotta-600">
               <Phone className="h-5 w-5" />
             </span>
             <span>
               <span className="block text-xs text-charcoal-400">Call / WhatsApp</span>
-              <span className="font-semibold text-charcoal-800">{siteConfig.contact.phoneDisplay}</span>
+              <span className="font-semibold text-charcoal-800">{store.phoneDisplay}</span>
             </span>
           </a>
-          <a href={`mailto:${siteConfig.contact.email}`} className="flex items-center gap-3">
+          <a href={`mailto:${store.email}`} className="flex items-center gap-3">
             <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-terracotta-50 text-terracotta-600">
               <Mail className="h-5 w-5" />
             </span>
             <span>
               <span className="block text-xs text-charcoal-400">Email us</span>
-              <span className="font-semibold text-charcoal-800">{siteConfig.contact.email}</span>
+              <span className="font-semibold text-charcoal-800">{store.email}</span>
             </span>
           </a>
           <div className="flex items-center gap-3">
@@ -53,7 +55,7 @@ export function CtaBanner() {
             </span>
             <span>
               <span className="block text-xs text-charcoal-400">Visit us</span>
-              <span className="font-semibold text-charcoal-800">{siteConfig.contact.address}</span>
+              <span className="font-semibold text-charcoal-800">{store.address}</span>
             </span>
           </div>
         </div>

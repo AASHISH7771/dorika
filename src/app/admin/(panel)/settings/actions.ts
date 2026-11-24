@@ -1,6 +1,6 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
@@ -92,7 +92,11 @@ export async function saveSettings(formData: FormData) {
 
   const { error, warning } = await writeSettings(payload);
 
-  // Settings feed the homepage hero, delivery fees, etc.
+  // Settings feed the homepage hero, the footer contact block, delivery fees
+  // and the organisation schema. The tag purge covers every page that reads the
+  // row while they stay static/ISR; the path calls refresh what is already
+  // rendered in this request's own caches.
+  revalidateTag("settings");
   revalidatePath("/admin/settings");
   revalidatePath("/");
   revalidatePath("/shop");

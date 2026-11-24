@@ -5,7 +5,8 @@ import { FaqAccordion } from "@/components/faq-accordion";
 import { faqGroups } from "@/lib/faq";
 import { JsonLd } from "@/components/json-ld";
 import { faqSchema, pageMetadata } from "@/lib/seo";
-import { siteConfig, whatsappLink } from "@/lib/config";
+import { getStoreInfo } from "@/lib/store-info";
+import { waHref } from "@/lib/store-types";
 
 export const metadata: Metadata = pageMetadata({
   title: "FAQ",
@@ -14,7 +15,8 @@ export const metadata: Metadata = pageMetadata({
   path: "/faq",
 });
 
-export default function FaqPage() {
+export default async function FaqPage() {
+  const store = await getStoreInfo();
   return (
     <div className="bg-paper">
       <JsonLd data={faqSchema()} />
@@ -69,7 +71,7 @@ export default function FaqPage() {
                 Message us on WhatsApp or send a note — we answer properly, not with templates.
               </p>
               <a
-                href={whatsappLink()}
+                href={waHref(store)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group mt-3 inline-flex items-center gap-1.5 text-sm text-ink"
@@ -86,7 +88,7 @@ export default function FaqPage() {
             </div>
 
             <p className="mt-6 font-mono text-[0.625rem] uppercase tracking-[0.14em] text-ink-faint">
-              {siteConfig.contact.address}
+              {store.address}
             </p>
           </div>
         </aside>

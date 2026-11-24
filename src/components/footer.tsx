@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { MapPin, Phone, Mail, Facebook, Instagram } from "lucide-react";
 import { Logo } from "@/components/logo";
-import { siteConfig, navLinks, whatsappLink } from "@/lib/config";
+import { getStoreInfo } from "@/lib/store-info";
+import { waHref } from "@/lib/store-types";
+import { siteConfig, navLinks } from "@/lib/config";
 
 // lucide-react (0.447.0) ships no TikTok brand icon, so it lives here as a
 // minimal inline SVG matching the same 16px box and stroke-less fill style.
@@ -18,8 +20,9 @@ function TikTokIcon({ className }: { className?: string }) {
   );
 }
 
-export function Footer() {
+export async function Footer() {
   const year = new Date().getFullYear();
+  const store = await getStoreInfo();
   return (
     <footer className="mt-10 border-t border-charcoal-100 bg-charcoal-800 text-charcoal-200">
       <div className="container-page grid gap-10 py-14 sm:grid-cols-2 lg:grid-cols-4">
@@ -27,7 +30,7 @@ export function Footer() {
         <div className="sm:col-span-2 lg:col-span-1">
           <Logo variant="light" className="h-8" />
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-charcoal-300">
-            {siteConfig.tagline}. Every piece is hand-woven in Pokhara, Nepal.
+            {siteConfig.tagline}. Every piece is hand-woven in {store.address}.
           </p>
           <div className="mt-5 flex gap-3">
             <a href={siteConfig.social.facebook} target="_blank" rel="noopener noreferrer"
@@ -80,22 +83,22 @@ export function Footer() {
           <ul className="space-y-3 text-sm">
             <li className="flex items-start gap-2.5">
               <MapPin className="mt-0.5 h-4 w-4 flex-shrink-0 text-terracotta-400" />
-              <span className="text-charcoal-300">{siteConfig.contact.address}</span>
+              <span className="text-charcoal-300">{store.address}</span>
             </li>
             <li className="flex items-center gap-2.5">
               <Phone className="h-4 w-4 flex-shrink-0 text-terracotta-400" />
-              <a href={`tel:+${siteConfig.contact.whatsapp}`} className="text-charcoal-300 hover:text-terracotta-400">
-                {siteConfig.contact.phoneDisplay}
+              <a href={`tel:+${store.phoneDial}`} className="text-charcoal-300 hover:text-terracotta-400">
+                {store.phoneDisplay}
               </a>
             </li>
             <li className="flex items-center gap-2.5">
               <Mail className="h-4 w-4 flex-shrink-0 text-terracotta-400" />
-              <a href={`mailto:${siteConfig.contact.email}`} className="text-charcoal-300 hover:text-terracotta-400">
-                {siteConfig.contact.email}
+              <a href={`mailto:${store.email}`} className="text-charcoal-300 hover:text-terracotta-400">
+                {store.email}
               </a>
             </li>
           </ul>
-          <a href={whatsappLink()} target="_blank" rel="noopener noreferrer"
+          <a href={waHref(store)} target="_blank" rel="noopener noreferrer"
              className="mt-4 inline-flex items-center gap-2 rounded-full bg-whatsapp px-4 py-2 text-sm font-semibold text-white transition hover:brightness-110">
             Chat on WhatsApp
           </a>
@@ -104,7 +107,7 @@ export function Footer() {
 
       <div className="border-t border-charcoal-700">
         <div className="container-page flex flex-col items-center justify-between gap-2 py-5 text-xs text-charcoal-400 sm:flex-row">
-          <p>© {year} Dorika. All rights reserved.</p>
+          <p>© {year} {store.name}. All rights reserved.</p>
           <p>Prices in {siteConfig.currency.code} ({siteConfig.currency.symbol})</p>
         </div>
       </div>

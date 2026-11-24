@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Check, Package } from "lucide-react";
-import { siteConfig } from "@/lib/config";
+import { getStoreInfo } from "@/lib/store-info";
+import { waHref } from "@/lib/store-types";
 import { getSettings } from "@/lib/queries";
 
 export const metadata: Metadata = {
@@ -19,7 +20,7 @@ export default async function OrderConfirmationPage({
 
   // Shop-wide payment destinations. Deliberately not order-specific so this
   // public page never reveals an order's contents to a guessed URL.
-  const settings = await getSettings();
+  const [settings, store] = await Promise.all([getSettings(), getStoreInfo()]);
   const hasManualPayment = Boolean(
     settings?.esewa_id || settings?.khalti_id || settings?.bank_account_number
   );
@@ -72,7 +73,7 @@ export default async function OrderConfirmationPage({
 
           <div className="mt-6 flex flex-col gap-3 sm:flex-row">
             <a
-              href={`https://wa.me/${siteConfig.contact.whatsapp}?text=${encodeURIComponent(waMsg)}`}
+              href={waHref(store, waMsg)}
               target="_blank" rel="noopener noreferrer"
               className="btn-primary btn-lg flex-1 !bg-whatsapp hover:!brightness-110"
             >

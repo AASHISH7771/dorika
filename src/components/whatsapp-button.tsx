@@ -1,6 +1,7 @@
 "use client";
 
-import { siteConfig, whatsappLink } from "@/lib/config";
+import { useStore } from "@/components/store-context";
+import { waHref } from "@/lib/store-types";
 
 /**
  * Floating WhatsApp button — fixed bottom-right on every page.
@@ -8,9 +9,10 @@ import { siteConfig, whatsappLink } from "@/lib/config";
  * subtle pulse. Opens a prefilled WhatsApp chat.
  */
 export function WhatsAppButton() {
+  const store = useStore();
   return (
     <a
-      href={whatsappLink(siteConfig.contact.whatsappPrefill)}
+      href={waHref(store)}
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat with Dorika on WhatsApp"

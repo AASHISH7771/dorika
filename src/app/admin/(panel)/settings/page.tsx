@@ -74,7 +74,11 @@ export default async function SettingsPage({
             <Field label="Store name" htmlFor="store_name">
               <Input id="store_name" name="store_name" defaultValue={v.store_name} />
             </Field>
-            <Field label="Currency" htmlFor="currency">
+            <Field
+              label="Currency"
+              htmlFor="currency"
+              hint="Bookkeeping only. Prices are stored and shown in NPR (Rs.), so changing this does not convert them."
+            >
               <Input id="currency" name="currency" defaultValue={v.currency} />
             </Field>
             <Field label="Email" htmlFor="store_email">

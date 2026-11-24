@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { LegalLayout, LegalSection } from "@/components/legal-layout";
 import { pageMetadata } from "@/lib/seo";
 import { siteConfig } from "@/lib/config";
+import { getStoreInfo } from "@/lib/store-info";
 
 export const metadata: Metadata = pageMetadata({
   title: "Terms of Service",
@@ -9,7 +10,8 @@ export const metadata: Metadata = pageMetadata({
   path: "/terms",
 });
 
-export default function TermsPage() {
+export default async function TermsPage() {
+  const store = await getStoreInfo();
   return (
     <LegalLayout title="Terms of Service" updated="November 2026">
       <p>
@@ -50,8 +52,8 @@ export default function TermsPage() {
       <LegalSection heading="Contact">
         <p>
           Questions? Reach us at{" "}
-          <a className="font-medium text-clay underline decoration-clay/30 underline-offset-2 hover:decoration-clay" href={`mailto:${siteConfig.contact.email}`}>
-            {siteConfig.contact.email}
+          <a className="font-medium text-clay underline decoration-clay/30 underline-offset-2 hover:decoration-clay" href={`mailto:${store.email}`}>
+            {store.email}
           </a>.
         </p>
       </LegalSection>

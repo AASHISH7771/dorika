@@ -3,7 +3,8 @@ import { localBusinessSchema, pageMetadata } from "@/lib/seo";
 import { JsonLd } from "@/components/json-ld";
 import { Phone, Mail, MapPin, MessageCircle, Clock } from "lucide-react";
 import { ContactForm } from "@/components/contact/contact-form";
-import { siteConfig, whatsappLink } from "@/lib/config";
+import { getStoreInfo } from "@/lib/store-info";
+import { waHref } from "@/lib/store-types";
 
 export const metadata: Metadata = pageMetadata({
   title: "Contact Us",
@@ -11,10 +12,11 @@ export const metadata: Metadata = pageMetadata({
   path: "/contact",
 });
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const store = await getStoreInfo();
   return (
     <div className="bg-cream-100">
-      <JsonLd data={localBusinessSchema()} />
+      <JsonLd data={localBusinessSchema(store)} />
       <div className="border-b border-charcoal-100 bg-white">
         <div className="container-page py-10 text-center">
           <p className="eyebrow mb-2">We&apos;d love to hear from you</p>
@@ -29,10 +31,10 @@ export default function ContactPage() {
         <div className="grid gap-8 lg:grid-cols-[1fr_1.4fr]">
           {/* Info */}
           <div className="space-y-4">
-            <InfoCard icon={Phone} title="Call us" value={siteConfig.contact.phoneDisplay} href={`tel:+${siteConfig.contact.whatsapp}`} />
-            <InfoCard icon={MessageCircle} title="WhatsApp" value="Chat with us instantly" href={whatsappLink()} external />
-            <InfoCard icon={Mail} title="Email" value={siteConfig.contact.email} href={`mailto:${siteConfig.contact.email}`} />
-            <InfoCard icon={MapPin} title="Visit" value={siteConfig.contact.address} />
+            <InfoCard icon={Phone} title="Call us" value={store.phoneDisplay} href={`tel:+${store.phoneDial}`} />
+            <InfoCard icon={MessageCircle} title="WhatsApp" value="Chat with us instantly" href={waHref(store)} external />
+            <InfoCard icon={Mail} title="Email" value={store.email} href={`mailto:${store.email}`} />
+            <InfoCard icon={MapPin} title="Visit" value={store.address} />
             <div className="flex items-start gap-3 rounded-2xl border border-charcoal-100 bg-white p-5">
               <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-terracotta-50 text-terracotta-600">
                 <Clock className="h-5 w-5" />
@@ -53,8 +55,8 @@ export default function ContactPage() {
         {/* Map */}
         <div className="mt-10 overflow-hidden rounded-2xl border border-charcoal-100 shadow-soft">
           <iframe
-            title="Dorika location: Pokhara, Nepal"
-            src={siteConfig.mapEmbed}
+            title={`Dorika location: ${store.address}`}
+            src={`https://www.google.com/maps?q=${encodeURIComponent(store.address)}&output=embed`}
             width="100%"
             height="400"
             style={{ border: 0 }}

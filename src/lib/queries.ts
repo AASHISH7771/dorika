@@ -6,9 +6,17 @@ import type { Product, Category, Settings } from "@/lib/types";
 // They return safe fallbacks on error so pages never crash before Supabase
 // is configured.
 
+/**
+ * The settings row: one tiny read on a handful of pages.
+ *
+ * Cached under the "settings" tag: pages stay static/ISR (this row is read in
+ * the shared layout, so an uncached read would make every page dynamic), and
+ * the admin save calls revalidateTag("settings") so an edit shows up on the
+ * next request rather than at the end of a TTL.
+ */
 export async function getSettings(): Promise<Settings | null> {
   try {
-    const supabase = createPublicClient();
+    const supabase = createPublicClient({ tags: ["settings"], revalidate: 300 });
     const { data } = await supabase.from("settings").select("*").eq("id", 1).single();
     return (data as Settings) ?? null;
   } catch {

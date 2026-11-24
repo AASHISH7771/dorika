@@ -16,6 +16,7 @@
 import type { Metadata } from "next";
 import { siteConfig, hasRealImage } from "@/lib/config";
 import type { Product } from "@/lib/types";
+import type { StoreInfo } from "@/lib/store-types";
 import { faqItems } from "@/lib/faq";
 
 export const SITE_URL = siteConfig.url;
@@ -112,30 +113,40 @@ export function pageMetadata({
 
 const ORG_ID = `${SITE_URL}/#organization`;
 
-/** Brand entity. Tells Google the three social profiles belong to Dorika. */
-export function organizationSchema() {
+/** Splits "Pokhara, Nepal" into schema.org locality + region parts. */
+function postalAddress(address: string) {
+  const [locality, ...rest] = address.split(",").map((part) => part.trim());
+  return {
+    "@type": "PostalAddress",
+    addressLocality: locality || "Pokhara",
+    addressRegion: rest[0] || "Gandaki",
+    addressCountry: "NP",
+  };
+}
+
+/**
+ * Brand entity. Tells Google the three social profiles belong to Dorika.
+ * `store` comes from the admin Settings row; siteConfig is the fallback so the
+ * schema never disagrees with what the page actually shows.
+ */
+export function organizationSchema(store?: StoreInfo) {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
     "@id": ORG_ID,
-    name: siteConfig.name,
+    name: store?.name ?? siteConfig.name,
     url: SITE_URL,
     logo: absoluteUrl("/favicon.svg"),
     image: absoluteUrl(DEFAULT_OG_IMAGE),
     description: siteConfig.description,
-    email: siteConfig.contact.email,
-    telephone: `+${siteConfig.contact.whatsapp}`,
+    email: store?.email ?? siteConfig.contact.email,
+    telephone: `+${store?.whatsapp ?? siteConfig.contact.whatsapp}`,
     sameAs: [
       siteConfig.social.facebook,
       siteConfig.social.instagram,
       siteConfig.social.tiktok,
     ],
-      address: {
-        "@type": "PostalAddress",
-        addressLocality: "Pokhara",
-        addressRegion: "Gandaki",
-        addressCountry: "NP",
-      },
+    address: postalAddress(store?.address ?? siteConfig.contact.address),
   };
 }
 
@@ -154,23 +165,21 @@ export function websiteSchema() {
 }
 
 /** Local business card — used on /contact where the address is on page. */
-export function localBusinessSchema() {
+export function localBusinessSchema(store?: StoreInfo) {
+  const address = store?.address ?? siteConfig.contact.address;
   return {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "@id": `${SITE_URL}/#localbusiness`,
-    name: siteConfig.name,
+    name: store?.name ?? siteConfig.name,
     url: SITE_URL,
     image: absoluteUrl(DEFAULT_OG_IMAGE),
-    telephone: `+${siteConfig.contact.whatsapp}`,
-    email: siteConfig.contact.email,
+    telephone: `+${store?.whatsapp ?? siteConfig.contact.whatsapp}`,
+    email: store?.email ?? siteConfig.contact.email,
     priceRange: "Rs. 1,500 – Rs. 6,000",
     address: {
-      "@type": "PostalAddress",
-      streetAddress: siteConfig.contact.address,
-      addressLocality: "Pokhara",
-      addressRegion: "Gandaki",
-      addressCountry: "NP",
+      ...postalAddress(address),
+      streetAddress: address,
     },
     parentOrganization: { "@id": ORG_ID },
   };

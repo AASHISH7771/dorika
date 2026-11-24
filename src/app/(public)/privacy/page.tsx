@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { LegalLayout, LegalSection } from "@/components/legal-layout";
 import { pageMetadata } from "@/lib/seo";
-import { siteConfig } from "@/lib/config";
+import { getStoreInfo } from "@/lib/store-info";
 
 export const metadata: Metadata = pageMetadata({
   title: "Privacy Policy",
@@ -9,7 +9,8 @@ export const metadata: Metadata = pageMetadata({
   path: "/privacy",
 });
 
-export default function PrivacyPage() {
+export default async function PrivacyPage() {
+  const store = await getStoreInfo();
   return (
     <LegalLayout title="Privacy Policy" updated="November 2026">
       <p>
@@ -54,10 +55,10 @@ export default function PrivacyPage() {
       <LegalSection heading="Contact">
         <p>
           Questions about your data? Email us at{" "}
-          <a className="font-medium text-clay underline decoration-clay/30 underline-offset-2 hover:decoration-clay" href={`mailto:${siteConfig.contact.email}`}>
-            {siteConfig.contact.email}
+          <a className="font-medium text-clay underline decoration-clay/30 underline-offset-2 hover:decoration-clay" href={`mailto:${store.email}`}>
+            {store.email}
           </a>{" "}
-          or call <mark className="hl-blush">{siteConfig.contact.phoneDisplay}</mark>.
+          or call <mark className="hl-blush">{store.phoneDisplay}</mark>.
         </p>
       </LegalSection>
     </LegalLayout>

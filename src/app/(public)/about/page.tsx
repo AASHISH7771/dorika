@@ -3,7 +3,7 @@ import { pageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import { Heart, Target, Sparkles, Hand, Leaf, Users } from "lucide-react";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { siteConfig } from "@/lib/config";
+import { getStoreInfo } from "@/lib/store-info";
 
 export const metadata: Metadata = pageMetadata({
   title: "About Us",
@@ -25,7 +25,8 @@ const steps = [
   { title: "Weave", desc: "Thread is wound back and forth until your portrait emerges." },
 ];
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const store = await getStoreInfo();
   return (
     <div className="bg-cream-100">
       {/* Hero */}
@@ -37,7 +38,7 @@ export default function AboutPage() {
               Made by hand,<br />in Pokhara, Nepal
             </h1>
             <p className="mt-5 text-charcoal-500">
-              Dorika began in {siteConfig.contact.address} with a simple idea: that a length of
+              {store.name} began in {store.address} with a simple idea: that a length of
               thread and a handful of nails could hold a memory. What started as a hobby grew
               into a small family workshop making handmade string art, plus our signature
               String Face Art, woven from your own photos.
