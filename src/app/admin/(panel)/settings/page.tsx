@@ -1,12 +1,17 @@
 import { getSettings } from "@/lib/queries";
 import { PageHeader } from "@/components/admin/ui";
 import { Field, Input, Textarea } from "@/components/ui/input";
+import { SaveButton } from "@/components/admin/save-button";
 import { siteConfig } from "@/lib/config";
 import { saveSettings } from "./actions";
 
 export const dynamic = "force-dynamic";
 
-export default async function SettingsPage({ searchParams }: { searchParams: { saved?: string } }) {
+export default async function SettingsPage({
+  searchParams,
+}: {
+  searchParams: { saved?: string; error?: string; warning?: string };
+}) {
   const s = await getSettings();
 
   const v = {
@@ -47,6 +52,18 @@ export default async function SettingsPage({ searchParams }: { searchParams: { s
       {searchParams.saved && (
         <p className="mb-5 rounded-xl border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-700">
           Settings saved.
+        </p>
+      )}
+      {searchParams.saved && searchParams.warning && (
+        <p className="mb-5 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">
+          <strong>Partly saved.</strong> {searchParams.warning}
+        </p>
+      )}
+      {searchParams.error && (
+        <p className="mb-5 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+          <strong>Could not save.</strong> The database rejected the write, so
+          nothing was changed. Reported reason:{" "}
+          <span className="font-mono text-[0.8125rem]">{searchParams.error}</span>
         </p>
       )}
 
@@ -151,9 +168,7 @@ export default async function SettingsPage({ searchParams }: { searchParams: { s
         </fieldset>
 
         <div className="flex justify-end">
-          <button type="submit" className="btn-primary btn-lg">
-            Save settings
-          </button>
+          <SaveButton />
         </div>
       </form>
     </>
