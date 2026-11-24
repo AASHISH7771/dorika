@@ -14,15 +14,15 @@ function isConfigured(url?: string, key?: string): url is string {
 }
 
 // Refreshes the Supabase auth session cookie on every request and
-// guards /admin and /account routes.
+// guards /admin. Sign-in is owner-only: there is no customer account area.
 export async function updateSession(request: NextRequest) {
   let response = NextResponse.next({ request });
 
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
-  // Not configured yet → don't throw. Let public pages render; admin/account
-  // pages will show the "connect Supabase" state from their own guards.
+  // Not configured yet → don't throw. Let public pages render; admin pages
+  // will show the "connect Supabase" state from their own guards.
   if (!isConfigured(url, anonKey)) {
     return response;
   }
@@ -70,16 +70,6 @@ export async function updateSession(request: NextRequest) {
       const url = request.nextUrl.clone();
       url.pathname = "/admin/login";
       url.searchParams.set("error", "not_admin");
-      return NextResponse.redirect(url);
-    }
-  }
-
-  // Protect /account (customer dashboard)
-  if (path.startsWith("/account") && !path.startsWith("/account/auth")) {
-    if (!user) {
-      const url = request.nextUrl.clone();
-      url.pathname = "/account/auth/login";
-      url.searchParams.set("redirect", path);
       return NextResponse.redirect(url);
     }
   }

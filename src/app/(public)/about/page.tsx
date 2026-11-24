@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/seo";
-import Image from "next/image";
 import Link from "next/link";
 import { Heart, Target, Sparkles, Hand, Leaf, Users } from "lucide-react";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { placeholderConfig, siteConfig } from "@/lib/config";
+import { siteConfig } from "@/lib/config";
 
 export const metadata: Metadata = pageMetadata({
   title: "About Us",
-  description: "The story of Dorika, a family string-art workshop in Khairenitar, Tanahun, Nepal.",
+  description: "The story of Dorika, a family string-art workshop in Pokhara, Nepal.",
   path: "/about",
 });
 
@@ -16,7 +15,7 @@ const values = [
   { icon: Hand, title: "Handmade, always", desc: "No machines. Every piece is wound by hand, nail by nail." },
   { icon: Heart, title: "Made with care", desc: "We treat every photo and every order as if it were our own." },
   { icon: Leaf, title: "Quality materials", desc: "Durable planks and premium threads that stand the test of time." },
-  { icon: Users, title: "Local & proud", desc: "A family craft creating livelihoods in Tanahun." },
+  { icon: Users, title: "Local & proud", desc: "A family craft creating livelihoods in Pokhara." },
 ];
 
 const steps = [
@@ -31,11 +30,11 @@ export default function AboutPage() {
     <div className="bg-cream-100">
       {/* Hero */}
       <section className="border-b border-charcoal-100 bg-white">
-        <div className="container-page grid items-center gap-10 py-14 lg:grid-cols-2">
-          <div>
+        <div className="container-page py-14">
+          <div className="max-w-3xl">
             <p className="eyebrow mb-2">Our story</p>
             <h1 className="text-4xl font-extrabold sm:text-5xl">
-              Made by hand,<br />in Tanahun, Nepal
+              Made by hand,<br />in Pokhara, Nepal
             </h1>
             <p className="mt-5 text-charcoal-500">
               Dorika began in {siteConfig.contact.address} with a simple idea: that a length of
@@ -47,9 +46,6 @@ export default function AboutPage() {
               <Link href="/custom-art" className="btn-primary btn-lg">Create your art</Link>
               <Link href="/shop" className="btn-outline btn-lg">Browse shop</Link>
             </div>
-          </div>
-          <div className="relative aspect-[4/3] overflow-hidden rounded-[2rem] border-8 border-white shadow-card">
-            <Image src={placeholderConfig.wide("dorika-about")} alt="Dorika workshop" fill sizes="(max-width:1024px) 100vw, 50vw" className="object-cover" />
           </div>
         </div>
       </section>
@@ -81,11 +77,8 @@ export default function AboutPage() {
 
       {/* Maker */}
       <section className="section">
-        <div className="container-page grid items-center gap-10 rounded-[2rem] bg-charcoal-800 p-8 text-white sm:p-12 lg:grid-cols-[1fr_1.5fr]">
-          <div className="relative mx-auto aspect-square w-full max-w-xs overflow-hidden rounded-2xl">
-            <Image src={placeholderConfig.product("dorika-maker")} alt="The maker" fill sizes="320px" className="object-cover" />
-          </div>
-          <div>
+        <div className="container-page rounded-[2rem] bg-charcoal-800 p-8 text-white sm:p-12">
+          <div className="max-w-3xl">
             <p className="eyebrow mb-2 !text-terracotta-400">Meet the maker</p>
             <h2 className="text-3xl font-extrabold text-white">One maker, one piece at a time</h2>
             <p className="mt-4 text-charcoal-200">

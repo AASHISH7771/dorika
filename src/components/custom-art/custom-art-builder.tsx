@@ -175,15 +175,6 @@ export function CustomArtBuilder({ price, makingTime }: { price: number; makingT
             Track your order
           </a>
         </div>
-        <div className="mt-6 rounded-xl border border-charcoal-100 p-4 text-left text-sm text-charcoal-500">
-          <p className="font-semibold text-charcoal-700">Save your details?</p>
-          <p className="mt-1">
-            Creating an account is optional. It just lets you see your order history later.{" "}
-            <a href="/account/auth/signup" className="font-semibold text-terracotta-600 hover:underline">
-              Create account
-            </a>
-          </p>
-        </div>
       </div>
     );
   }
@@ -315,7 +306,7 @@ export function CustomArtBuilder({ price, makingTime }: { price: number; makingT
 
             <div className="grid gap-4 sm:grid-cols-2">
               <Field label="District" required>
-                <Input value={form.district} onChange={(e) => set("district", e.target.value)} placeholder="e.g. Tanahun" />
+                <Input value={form.district} onChange={(e) => set("district", e.target.value)} placeholder="e.g. Kaski" />
               </Field>
               <Field label="Municipality / City">
                 <Input value={form.municipality} onChange={(e) => set("municipality", e.target.value)} placeholder="e.g. Byas" />
@@ -327,7 +318,7 @@ export function CustomArtBuilder({ price, makingTime }: { price: number; makingT
                 <Input value={form.ward_tole} onChange={(e) => set("ward_tole", e.target.value)} placeholder="Ward no. / tole" />
               </Field>
               <Field label="Nearest landmark">
-                <Input value={form.landmark} onChange={(e) => set("landmark", e.target.value)} placeholder="e.g. near Khairenitar bus park" />
+                <Input value={form.landmark} onChange={(e) => set("landmark", e.target.value)} placeholder="e.g. near Lakeside" />
               </Field>
             </div>
 

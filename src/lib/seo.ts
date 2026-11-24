@@ -130,12 +130,12 @@ export function organizationSchema() {
       siteConfig.social.instagram,
       siteConfig.social.tiktok,
     ],
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: "Khairenitar",
-      addressRegion: "Tanahun",
-      addressCountry: "NP",
-    },
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Pokhara",
+        addressRegion: "Gandaki",
+        addressCountry: "NP",
+      },
   };
 }
 
@@ -168,8 +168,8 @@ export function localBusinessSchema() {
     address: {
       "@type": "PostalAddress",
       streetAddress: siteConfig.contact.address,
-      addressLocality: "Khairenitar",
-      addressRegion: "Tanahun",
+      addressLocality: "Pokhara",
+      addressRegion: "Gandaki",
       addressCountry: "NP",
     },
     parentOrganization: { "@id": ORG_ID },

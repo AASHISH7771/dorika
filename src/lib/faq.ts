@@ -20,7 +20,7 @@ export const faqGroups: FaqGroup[] = [
     items: [
       {
         q: "Do I need an account to order?",
-        a: "No. You can browse, add to cart, checkout, and submit a custom art request entirely as a guest. Accounts are optional and only let you save your details and see order history.",
+        a: "No. You can browse, add to cart, checkout, and submit a custom art request entirely as a guest. There is no account to create and nothing to remember a password for. Your order details are sent by email and WhatsApp, and you can look them up any time on the Track Order page.",
       },
       {
         q: "How do I track my order?",

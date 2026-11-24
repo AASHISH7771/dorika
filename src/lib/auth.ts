@@ -27,29 +27,6 @@ export async function requireAdmin(): Promise<Profile> {
   return profile;
 }
 
-// Guards a customer account route.
-export async function requireUser(): Promise<Profile> {
-  const profile = await getCurrentProfile();
-  if (!profile) redirect("/account/auth/login");
-  return profile;
-}
-
-// Guards a customer account route using only the auth session.
-// Used by the /account dashboard: it survives a missing profile row
-// (and a not-yet-configured Supabase project) without looping.
-export async function requireCustomerSession(): Promise<{
-  userId: string;
-  email: string | null;
-}> {
-  try {
-    const supabase = createClient();
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-    if (user) return { userId: user.id, email: user.email ?? null };
-  } catch {
-    // Supabase not configured yet — fall through to the login page,
-    // which explains how to switch accounts on.
-  }
-  redirect("/account/auth/login");
-}
+// Note: there is deliberately no customer guard here. The storefront has no
+// accounts — customers browse, check out and track orders as guests. The only
+// sign-in that exists is requireAdmin() above, for the shop owner.

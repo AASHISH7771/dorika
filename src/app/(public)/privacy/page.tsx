@@ -40,8 +40,8 @@ export default function PrivacyPage() {
       </LegalSection>
       <LegalSection heading="No account required">
         <p>
-          You can browse, order and track entirely as a guest. Creating an account is optional and
-          only stores the details you choose to save.
+          You can browse, order and track entirely as a guest. There is no account to create and
+          we do not store a password for you.
         </p>
       </LegalSection>
       <LegalSection heading="Data retention & security">

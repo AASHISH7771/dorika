@@ -66,9 +66,22 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(url, 308);
   }
 
-  // Session refresh + auth guards are only needed on the protected areas.
+  /**
+   * The customer account area is gone. Sign-in now exists only for the shop
+   * owner, at /admin/login — so /account is not a page anyone should reach.
+   * Old bookmarks, shared links and any indexed /account URL get sent home
+   * instead of a 404.
+   */
+  if (pathname === "/account" || pathname.startsWith("/account/")) {
+    const url = request.nextUrl.clone();
+    url.pathname = "/";
+    url.search = "";
+    return NextResponse.redirect(url, 301);
+  }
+
+  // Session refresh + auth guard are only needed on the admin area.
   // The storefront is anonymous browsing and gets no middleware work.
-  if (pathname.startsWith("/admin") || pathname.startsWith("/account")) {
+  if (pathname.startsWith("/admin")) {
     return await updateSession(request);
   }
 

@@ -10,10 +10,13 @@
 --  you want to see what will change.
 -- ─────────────────────────────────────────────────────────────
 
--- 1. Homepage hero — remove the vague headline and the "heart of Nepal" tagline
+-- 1. Homepage hero — remove the vague headline and the "heart of Nepal" tagline.
+--    `address` rides along because it prints on every invoice and still
+--    read "Khairenitar, Tanahun, Nepal".
 update public.settings
 set hero_headline = 'Your photo, made into string art.',
-    hero_tagline  = 'Made by hand in Khairenitar, Nepal. Delivered anywhere in the country.';
+    hero_tagline  = 'Made by hand in Pokhara, Nepal. Delivered anywhere in the country.',
+    address       = 'Pokhara, Nepal';
 
 -- 2. Product names — em dash becomes a comma: "Custom String Face Art, 45cm"
 update public.products

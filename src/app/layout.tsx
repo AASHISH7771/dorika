@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   description: siteConfig.description,
   keywords: [
     "string art", "Nepal", "custom face art", "handmade", "Dorika",
-    "wall art Nepal", "personalised gift Nepal", "Tanahun",
+    "wall art Nepal", "personalised gift Nepal", "Pokhara",
   ],
   icons: {
     icon: [

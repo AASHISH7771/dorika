@@ -272,7 +272,7 @@ create table if not exists public.settings (
   store_email      text not null default 'shopdorika@gmail.com',
   store_phone      text not null default '9708285877',
   whatsapp         text not null default '9779708285877',
-  address          text not null default 'Khairenitar, Tanahun, Nepal',
+  address          text not null default 'Pokhara, Nepal',
   currency         text not null default 'NPR',
   delivery_fee     numeric(12,2) not null default 150,
   free_delivery_over numeric(12,2) not null default 5000,

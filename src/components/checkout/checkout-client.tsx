@@ -114,10 +114,10 @@ export function CheckoutClient({ settings }: { settings: Settings | null }) {
               <Input type="email" value={form.email} onChange={(e) => set("email", e.target.value)} placeholder="you@example.com" />
             </Field>
             <Field label="District" required>
-              <Input value={form.district} onChange={(e) => set("district", e.target.value)} placeholder="e.g. Tanahun" />
+              <Input value={form.district} onChange={(e) => set("district", e.target.value)} placeholder="e.g. Kaski" />
             </Field>
             <Field label="City / Municipality">
-              <Input value={form.city} onChange={(e) => set("city", e.target.value)} placeholder="e.g. Byas" />
+              <Input value={form.city} onChange={(e) => set("city", e.target.value)} placeholder="e.g. Pokhara" />
             </Field>
             <Field label="Full delivery address" required className="sm:col-span-2">
               <Textarea value={form.address} onChange={(e) => set("address", e.target.value)} placeholder="House / street / area" />

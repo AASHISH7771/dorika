@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Menu, X, ShoppingBag, Heart, User, Search, ArrowUpRight } from "lucide-react";
+import { Menu, X, ShoppingBag, Heart, Search, ArrowUpRight } from "lucide-react";
 import { Logo } from "@/components/logo";
 import { siteConfig, whatsappLink } from "@/lib/config";
 import { useCart } from "@/lib/cart-context";
@@ -142,14 +142,6 @@ export function Navbar({ categories = [] }: { categories?: Category[] }) {
 
 
               <Link
-                href="/account"
-                aria-label="Your account"
-                className="hidden h-9 w-9 items-center justify-center rounded-xs text-ink-soft transition-colors hover:bg-paper-2 hover:text-ink sm:flex"
-              >
-                <User className="h-[17px] w-[17px]" strokeWidth={1.5} />
-              </Link>
-
-              <Link
                 href="/wishlist"
                 aria-label={`Wishlist${wishCount ? `, ${wishCount} saved` : ""}`}
                 className="relative hidden h-9 w-9 items-center justify-center rounded-xs text-ink-soft transition-colors hover:bg-paper-2 hover:text-ink sm:flex"
@@ -253,13 +245,6 @@ export function Navbar({ categories = [] }: { categories?: Category[] }) {
                 className="border border-line px-4 py-3 text-sm text-ink-soft transition-colors hover:border-ink hover:text-ink"
               >
                 Track order
-              </Link>
-              <Link
-                href="/account"
-                tabIndex={mobileOpen ? 0 : -1}
-                className="border border-line px-4 py-3 text-sm text-ink-soft transition-colors hover:border-ink hover:text-ink"
-              >
-                Account
               </Link>
               <Link
                 href="/wishlist"

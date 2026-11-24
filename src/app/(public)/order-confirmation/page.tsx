@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Check, Package, UserPlus } from "lucide-react";
+import { Check, Package } from "lucide-react";
 import { siteConfig } from "@/lib/config";
 import { getSettings } from "@/lib/queries";
 
@@ -81,19 +81,6 @@ export default async function OrderConfirmationPage({
             <Link href={`/track?order=${orderNo}`} className="btn-outline btn-lg flex-1">
               <Package className="h-4 w-4" /> Track your order
             </Link>
-          </div>
-
-          {/* Soft, optional account prompt */}
-          <div className="mt-6 flex items-start gap-3 rounded-xl border border-charcoal-100 p-4 text-left">
-            <UserPlus className="mt-0.5 h-5 w-5 flex-shrink-0 text-terracotta-500" />
-            <p className="text-sm text-charcoal-500">
-              <span className="font-semibold text-charcoal-700">Want to save your details?</span>{" "}
-              Creating an account is optional. It lets you see your order history and
-              reuse your address next time.{" "}
-              <Link href="/account/auth/signup" className="font-semibold text-terracotta-600 hover:underline">
-                Create account
-              </Link>
-            </p>
           </div>
 
           <Link href="/shop" className="btn-ghost btn-md mt-6">

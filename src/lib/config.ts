@@ -23,7 +23,7 @@ export const siteConfig = {
   name: "Dorika",
   tagline: "String art, handmade in Nepal",
   description:
-    "Dorika makes string art by hand in Khairenitar, Nepal. Send a photo and we turn it into a custom portrait on a 45cm plank, delivered anywhere in Nepal.",
+    "Dorika makes string art by hand in Pokhara, Nepal. Send a photo and we turn it into a custom portrait on a 45cm plank, delivered anywhere in Nepal.",
   url: resolveSiteUrl(),
 
   contact: {
@@ -55,9 +55,9 @@ export const siteConfig = {
     makingTime: "7-10 days",
   },
 
-  // Google Maps embed for Khairenitar, Tanahun
+  // Google Maps embed for Pokhara, Nepal
   mapEmbed:
-    "https://www.google.com/maps?q=Khairenitar,Tanahun,Nepal&output=embed",
+    "https://www.google.com/maps?q=Pokhara,Nepal&output=embed",
 } as const;
 
 // Build a WhatsApp deep-link with an optional custom message

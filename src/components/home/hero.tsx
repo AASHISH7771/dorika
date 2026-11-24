@@ -67,11 +67,11 @@ export function Hero({ headline, tagline }: { headline: string; tagline: string 
 
           <div className="mt-9 flex flex-wrap items-center gap-x-7 gap-y-4">
             <Link href="/custom-art" className="btn-primary btn-lg group">
-              Commission a portrait
+              Create Your Custom Art
               <ArrowRight className="btn-arrow h-4 w-4" strokeWidth={1.5} />
             </Link>
             <Link href="/shop" className="link-thread group text-sm font-medium">
-              Shop the collection
+              Shop Now
               <ArrowUpRight
                 className="h-3.5 w-3.5 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
                 strokeWidth={1.5}
@@ -98,10 +98,6 @@ export function Hero({ headline, tagline }: { headline: string; tagline: string 
                 className="object-cover"
               />
             </div>
-            <figcaption className="mt-4 flex flex-wrap items-center justify-between gap-2 border-y border-line py-3">
-              <span className="figure">Fig. 01 — String Face Art</span>
-              <span className="figure text-ink-faint">Thread on plywood · 45 cm</span>
-            </figcaption>
           </figure>
         </div>
       </div>

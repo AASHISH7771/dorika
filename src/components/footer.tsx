@@ -27,7 +27,7 @@ export function Footer() {
         <div className="sm:col-span-2 lg:col-span-1">
           <Logo variant="light" className="h-8" />
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-charcoal-300">
-            {siteConfig.tagline}. Every piece is hand-woven in Khairenitar, Tanahun.
+            {siteConfig.tagline}. Every piece is hand-woven in Pokhara, Nepal.
           </p>
           <div className="mt-5 flex gap-3">
             <a href={siteConfig.social.facebook} target="_blank" rel="noopener noreferrer"

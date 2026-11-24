@@ -14,9 +14,17 @@ export function FeaturedProducts({ products }: { products: Product[] }) {
           title="Featured pieces"
           subtitle="Our most-loved handmade string art, ready to ship."
         />
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {/* Flex + justify-center rather than a 4-column grid: with only three
+            pieces a grid pins them to the left and leaves a hole on the right.
+            Widths reproduce the same 1 / 2 / 4 column rhythm with gap-5. */}
+        <div className="flex flex-wrap justify-center gap-5">
           {products.slice(0, 8).map((p) => (
-            <ProductCard key={p.id} product={p} />
+            <div
+              key={p.id}
+              className="w-full sm:w-[calc(50%_-_0.625rem)] lg:w-[calc(25%_-_0.9375rem)]"
+            >
+              <ProductCard product={p} />
+            </div>
           ))}
         </div>
         <div className="mt-10 text-center">
