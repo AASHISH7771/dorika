@@ -1,6 +1,6 @@
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
-import { WhatsAppButton } from "@/components/whatsapp-button";
+import { SupportWidget } from "@/components/support/chat-widget";
 import { StoreProvider } from "@/components/store-context";
 import { JsonLd } from "@/components/json-ld";
 import { organizationSchema, websiteSchema } from "@/lib/seo";
@@ -28,7 +28,9 @@ export default async function PublicLayout({
         <Navbar />
         <main className="min-h-[60vh]">{children}</main>
         <Footer />
-        <WhatsAppButton />
+        {/* Support chat replaces the old floating WhatsApp button. It still
+            hands off to WhatsApp, but only once the bot has failed to answer. */}
+        <SupportWidget />
       </StoreProvider>
     </>
   );

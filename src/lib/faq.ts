@@ -34,7 +34,7 @@ export const faqGroups: FaqGroup[] = [
     items: [
       {
         q: "How does String Face Art work?",
-        a: "You upload a clear face photo, we design a thread pattern from it, and craft it onto a 45cm round wooden plank, and deliver it to your door. The whole process takes about 4–5 days.",
+        a: "You upload a clear face photo, we design a thread pattern from it, and craft it onto a 45cm round wooden plank, and deliver it to your door. The whole process takes 7–10 days, then it is dispatched.",
       },
       {
         q: "What photo works best?",
