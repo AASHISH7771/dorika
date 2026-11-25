@@ -11,6 +11,7 @@ import {
   Tags,
   Users,
   Mail,
+  MessagesSquare,
   CreditCard,
   Settings,
   Menu,
@@ -25,6 +26,8 @@ export interface AdminBadges {
   pendingOrders: number;
   pendingCustom: number;
   unreadMessages: number;
+  /** Live support chats with something new from the customer. */
+  openChats: number;
 }
 
 const NAV = [
@@ -34,6 +37,7 @@ const NAV = [
   { href: "/admin/products", label: "Products", icon: Package, badge: null },
   { href: "/admin/categories", label: "Categories", icon: Tags, badge: null },
   { href: "/admin/customers", label: "Customers", icon: Users, badge: null },
+  { href: "/admin/support", label: "Support", icon: MessagesSquare, badge: "openChats" },
   { href: "/admin/messages", label: "Messages", icon: Mail, badge: "unreadMessages" },
   { href: "/admin/payments", label: "Payments", icon: CreditCard, badge: null },
   { href: "/admin/settings", label: "Settings", icon: Settings, badge: null },
